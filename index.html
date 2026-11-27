@@ -1,0 +1,2826 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>邻舍 · 10周年纪念官网 | 中山市邻舍社会工作服务中心 — 专注环保·乐在分享</title>
+
+  <!-- 引入绘本感中文字体：Noto Serif SC、站酷小薇体、Noto Sans SC、马善政毛笔体 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@500;600;700;900&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet" />
+
+  <!-- 引入 Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind 主题色与字体自定义配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paper: {
+              DEFAULT: '#FAF6EE',
+              cream: '#FFFDF8',
+              kraft: '#F2E9DA',
+              warm: '#EFE4D1'
+            },
+            moss: {
+              light: '#B5CFA8',
+              soft: '#7EA172',
+              DEFAULT: '#5F8D4E',
+              deep: '#3D6133'
+            },
+            sun: {
+              pale: '#FDF3D7',
+              light: '#F4D06F',
+              DEFAULT: '#E5A93C',
+              deep: '#C4841D'
+            },
+            earth: {
+              light: '#9A7B63',
+              DEFAULT: '#6D523E',
+              deep: '#4A392C'
+            },
+            aqua: {
+              pale: '#E4F1F0',
+              light: '#A8DADC',
+              DEFAULT: '#89B0AE',
+              deep: '#557D7B'
+            },
+            blossom: {
+              light: '#F5C4B6',
+              DEFAULT: '#E07A5F'
+            }
+          },
+          fontFamily: {
+            serif: ['"Noto Serif SC"', 'serif'],
+            storybook: ['"ZCOOL XiaoWei"', '"Noto Serif SC"', 'serif'],
+            sans: ['"Noto Sans SC"', 'system-ui', 'sans-serif'],
+            brush: ['"Ma Shan Zheng"', 'cursive']
+          },
+          boxShadow: {
+            watercolor: '0 10px 30px -8px rgba(109, 82, 62, 0.12), 0 4px 12px -4px rgba(95, 141, 78, 0.08)',
+            card: '0 14px 36px -10px rgba(74, 57, 44, 0.11), inset 0 1px 0 rgba(255, 255, 255, 0.85)',
+            glowGold: '0 0 24px rgba(244, 208, 111, 0.65)',
+            glowMoss: '0 0 22px rgba(126, 161, 114, 0.5)'
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- 绘本水彩肌理、手绘边框与柔和动效样式 -->
+  <style>
+    /* 宣纸与水彩纸质感底色 */
+    body {
+      background-color: #FAF6EE;
+      color: #4A392C;
+      font-family: 'Noto Sans SC', sans-serif;
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(circle at 12% 18%, rgba(168, 218, 220, 0.22) 0%, transparent 42%),
+        radial-gradient(circle at 88% 12%, rgba(244, 208, 111, 0.22) 0%, transparent 40%),
+        radial-gradient(circle at 50% 60%, rgba(181, 207, 168, 0.14) 0%, transparent 50%);
+    }
+
+    /* 细腻水彩纸纤维叠加层（纯内联SVG噪点，零外部依赖） */
+    .paper-texture-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 40;
+      opacity: 0.032;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* 手绘不规则柔和圆角卡片 */
+    .storybook-card {
+      background: rgba(255, 253, 248, 0.92);
+      border: 1.5px solid rgba(109, 82, 62, 0.18);
+      border-radius: 26px 20px 28px 22px / 22px 28px 20px 26px;
+      box-shadow: 0 12px 32px -10px rgba(74, 57, 44, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+
+    .storybook-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(95, 141, 78, 0.42);
+      box-shadow: 0 18px 40px -10px rgba(95, 141, 78, 0.16), 0 6px 16px -6px rgba(229, 169, 60, 0.14);
+    }
+
+    /* 手绘虚线便签/吊牌风格 */
+    .handdrawn-tag {
+      background: linear-gradient(145deg, #FFFDF8 0%, #F7EFE0 100%);
+      border: 1.5px dashed rgba(109, 82, 62, 0.32);
+      border-radius: 18px 24px 20px 16px / 20px 16px 24px 18px;
+    }
+
+    /* 水彩晕染笔触标题下划线 */
+    .watercolor-underline {
+      position: relative;
+      display: inline-block;
+      z-index: 1;
+    }
+    .watercolor-underline::after {
+      content: '';
+      position: absolute;
+      left: -6px;
+      right: -6px;
+      bottom: 2px;
+      height: 12px;
+      background: linear-gradient(90deg, rgba(244, 208, 111, 0.55), rgba(181, 207, 168, 0.55), rgba(168, 218, 220, 0.45));
+      border-radius: 999px 40% 999px 60%;
+      z-index: -1;
+      transform: rotate(-0.8deg);
+    }
+
+    /* 吉祥物轻微呼吸与摇摆动画 */
+    @keyframes mascotFloat {
+      0%, 100% { transform: translateY(0px) rotate(-0.8deg); }
+      50% { transform: translateY(-9px) rotate(1.2deg); }
+    }
+    @keyframes mascotWave {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-16deg); }
+      50% { transform: rotate(8deg); }
+      75% { transform: rotate(-12deg); }
+    }
+    @keyframes heartDrift {
+      0% { opacity: 0; transform: translate(0, 6px) scale(0.7); }
+      35% { opacity: 1; }
+      100% { opacity: 0; transform: translate(-22px, -24px) scale(1.15); }
+    }
+    @keyframes gentleSway {
+      0%, 100% { transform: rotate(-2deg); }
+      50% { transform: rotate(2.5deg); }
+    }
+    @keyframes waterFlowDash {
+      to { stroke-dashoffset: -48; }
+    }
+    @keyframes dandelionPulse {
+      0%, 100% { transform: scale(1); opacity: 0.78; }
+      50% { transform: scale(1.28); opacity: 1; }
+    }
+
+    .animate-mascot-float {
+      animation: mascotFloat 4.2s ease-in-out infinite;
+    }
+    .animate-mascot-wave {
+      transform-origin: 152px 118px;
+      animation: mascotWave 2.6s ease-in-out infinite;
+    }
+    .animate-heart-1 {
+      animation: heartDrift 3.2s ease-out infinite;
+    }
+    .animate-heart-2 {
+      animation: heartDrift 3.2s ease-out 1.1s infinite;
+    }
+    .animate-sway {
+      transform-origin: bottom center;
+      animation: gentleSway 5s ease-in-out infinite;
+    }
+    .water-flow-line {
+      stroke-dasharray: 10 14;
+      animation: waterFlowDash 1.9s linear infinite;
+    }
+    .dandelion-pulse {
+      animation: dandelionPulse 2.4s ease-in-out infinite;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    /* 滚动渐现动画 */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* 自定义滑块样式（温暖计算器） */
+    input[type="range"].eco-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #B5CFA8 0%, #5F8D4E 55%, #E5A93C 100%);
+      outline: none;
+    }
+    input[type="range"].eco-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #FFFDF8;
+      border: 3px solid #5F8D4E;
+      box-shadow: 0 4px 12px rgba(74, 57, 44, 0.25);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    input[type="range"].eco-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    /* 隐藏横向滚动条但保持滑动 */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+
+<body class="antialiased selection:bg-sun-light/50 selection:text-earth-deep">
+  <!-- 宣纸肌理滤镜层 -->
+  <div class="paper-texture-overlay" aria-hidden="true"></div>
+
+  <!-- 全局温馨提示 Toast（替代原生 alert） -->
+  <div id="toast-container" class="fixed bottom-6 right-4 sm:right-6 z-[70] flex flex-col gap-3 pointer-events-none max-w-sm w-[calc(100%-2rem)]"></div>
+
+  <!-- ========================================================= -->
+  <!-- 1. 顶部悬浮水彩毛玻璃导航栏 -->
+  <!-- ========================================================= -->
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-paper-cream/80 backdrop-blur-md border-b border-earth/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-18 py-3">
+        <!-- 左侧：手绘嫩芽房子徽标 + 邻舍 10周年 -->
+        <a href="#hero" class="flex items-center gap-3 group">
+          <div class="relative w-11 h-11 rounded-2xl bg-gradient-to-br from-moss-light/40 via-sun-pale to-aqua-pale border border-moss/30 flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
+            <div class="w-8 h-8">
+              <img src="logo.png" style="margin-top: -3px;">
+            </div>
+            <!-- 手绘邻舍嫩芽小屋 SVG Logo -->
+<!--            <svg viewBox="0 0 48 48" class="w-8 h-8" fill="none" aria-hidden="true">-->
+<!--              <path d="M9 23L24 11L39 23" stroke="#5F8D4E" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>-->
+<!--              <path d="M13 21V36C13 37.5 14.2 38.5 15.8 38.5H32.2C33.8 38.5 35 37.5 35 36V21" stroke="#6D523E" stroke-width="2.4" stroke-linecap="round" fill="#FFFDF8"/>-->
+<!--              &lt;!&ndash; 嫩芽 &ndash;&gt;-->
+<!--              <path d="M24 34V23" stroke="#5F8D4E" stroke-width="2.2" stroke-linecap="round"/>-->
+<!--              <path d="M24 27C20 26.5 18 23.5 18.5 20.5C21.5 20.5 24 23 24 27Z" fill="#7EA172" stroke="#3D6133" stroke-width="1.2"/>-->
+<!--              <path d="M24 25C28 24.5 30 21.5 29.5 18.5C26.5 18.5 24 21 24 25Z" fill="#B5CFA8" stroke="#3D6133" stroke-width="1.2"/>-->
+<!--              <circle cx="35.5" cy="12.5" r="3.2" fill="#F4D06F"/>-->
+<!--            </svg>-->
+          </div>
+          <div class="leading-tight">
+            <div class="flex items-center gap-2">
+              <span class="font-storybook text-xl sm:text-2xl text-earth-deep tracking-wide">邻舍</span>
+              <span class="px-2 py-0.5 text-[11px] font-serif font-bold rounded-full bg-sun-pale text-sun-deep border border-sun/40">10周年</span>
+            </div>
+            <p class="text-[11px] text-earth-light tracking-wider hidden sm:block">中山市邻舍社会工作服务中心</p>
+          </div>
+        </a>
+
+        <!-- 中间导航锚点（桌面端） -->
+        <nav class="hidden lg:flex items-center gap-1 bg-paper/70 px-3 py-1.5 rounded-full border border-earth/10">
+          <a href="#hero" class="nav-link px-3.5 py-1.5 rounded-full text-sm font-medium text-earth-deep hover:text-moss-deep hover:bg-moss-light/25 transition-colors">首页</a>
+          <a href="#about" class="nav-link px-3.5 py-1.5 rounded-full text-sm font-medium text-earth-deep hover:text-moss-deep hover:bg-moss-light/25 transition-colors">关于邻舍</a>
+          <a href="#timeline" class="nav-link px-3.5 py-1.5 rounded-full text-sm font-medium text-earth-deep hover:text-moss-deep hover:bg-moss-light/25 transition-colors">十年年轮</a>
+          <a href="#town" class="nav-link px-3.5 py-1.5 rounded-full text-sm font-medium text-earth-deep hover:text-moss-deep hover:bg-moss-light/25 transition-colors">邻里小镇</a>
+          <a href="#matrix" class="nav-link px-3.5 py-1.5 rounded-full text-sm font-medium text-earth-deep hover:text-moss-deep hover:bg-moss-light/25 transition-colors">生态矩阵</a>
+          <a href="#footprint" class="nav-link px-3.5 py-1.5 rounded-full text-sm font-medium text-earth-deep hover:text-moss-deep hover:bg-moss-light/25 transition-colors">爱的足迹</a>
+          <a href="#honors" class="nav-link px-3.5 py-1.5 rounded-full text-sm font-medium text-earth-deep hover:text-moss-deep hover:bg-moss-light/25 transition-colors">荣誉勋章</a>
+        </nav>
+
+        <!-- 右侧行动按钮 + 移动端菜单按钮 -->
+        <div class="flex items-center gap-2.5">
+          <button onclick="openActionModal('donate')" class="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-full bg-gradient-to-r from-moss to-moss-soft text-white text-sm font-medium shadow-md hover:shadow-lg hover:from-moss-deep hover:to-moss transition-all active:scale-95">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            <span>加入我们 <span class="hidden sm:inline">/ 参与公益</span></span>
+          </button>
+
+          <button id="mobile-menu-btn" aria-label="打开导航菜单" class="lg:hidden p-2.5 rounded-2xl bg-paper-kraft/70 border border-earth/15 text-earth-deep hover:bg-moss-light/30 transition-colors">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- 移动端展开菜单 -->
+      <div id="mobile-menu" class="hidden lg:hidden pb-4 pt-2 border-t border-earth/10">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          <a href="#hero" class="mobile-nav-link px-4 py-2.5 rounded-2xl bg-paper/80 text-center text-sm font-medium text-earth-deep hover:bg-moss-light/30">首页</a>
+          <a href="#about" class="mobile-nav-link px-4 py-2.5 rounded-2xl bg-paper/80 text-center text-sm font-medium text-earth-deep hover:bg-moss-light/30">关于邻舍</a>
+          <a href="#timeline" class="mobile-nav-link px-4 py-2.5 rounded-2xl bg-paper/80 text-center text-sm font-medium text-earth-deep hover:bg-moss-light/30">十年年轮</a>
+          <a href="#town" class="mobile-nav-link px-4 py-2.5 rounded-2xl bg-paper/80 text-center text-sm font-medium text-earth-deep hover:bg-moss-light/30">邻里小镇</a>
+          <a href="#matrix" class="mobile-nav-link px-4 py-2.5 rounded-2xl bg-paper/80 text-center text-sm font-medium text-earth-deep hover:bg-moss-light/30">生态矩阵</a>
+          <a href="#footprint" class="mobile-nav-link px-4 py-2.5 rounded-2xl bg-paper/80 text-center text-sm font-medium text-earth-deep hover:bg-moss-light/30">爱的足迹</a>
+          <a href="#honors" class="mobile-nav-link px-4 py-2.5 rounded-2xl bg-paper/80 text-center text-sm font-medium text-earth-deep hover:bg-moss-light/30">荣誉勋章</a>
+          <a href="#next-decade" class="mobile-nav-link px-4 py-2.5 rounded-2xl bg-sun-pale/80 text-center text-sm font-medium text-sun-deep hover:bg-sun-light/40">十年寄语墙</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ========================================================= -->
+    <!-- 2. 首屏 Hero 区域：《专注环保·乐在分享》十周年绘本封面感 -->
+    <!-- ========================================================= -->
+    <section id="hero" class="relative pt-28 pb-16 sm:pt-32 sm:pb-24 overflow-hidden">
+      <!-- 漂浮蒲公英种子粒子画布 -->
+      <canvas id="dandelion-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-10"></canvas>
+
+      <!-- 背景柔和的水彩晕染色块 -->
+      <div class="absolute top-16 -left-24 w-80 h-80 rounded-full bg-moss-light/30 blur-3xl pointer-events-none"></div>
+      <div class="absolute top-28 -right-24 w-96 h-96 rounded-full bg-sun-light/25 blur-3xl pointer-events-none"></div>
+      <div class="absolute bottom-8 left-1/3 w-72 h-72 rounded-full bg-aqua-light/25 blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+          <!-- 左侧：绘本封面文案 -->
+          <div class="lg:col-span-6 text-center lg:text-left">
+            <!-- 纪念绘本小标签 -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-paper-cream/90 border border-sun/45 shadow-sm mb-6">
+              <span class="w-2.5 h-2.5 rounded-full bg-moss animate-pulse"></span>
+              <span class="text-xs sm:text-sm font-medium text-earth tracking-wide">2016 — 2026 · 成立10周年纪念官网</span>
+            </div>
+
+            <h1 class="font-storybook text-4xl sm:text-5xl lg:text-6xl text-earth-deep leading-tight tracking-wide mb-4">
+              <span class="watercolor-underline">专注环保</span>
+              <span class="text-sun mx-1">·</span>
+              <span class="text-moss-deep">乐在分享</span>
+            </h1>
+
+            <p class="font-serif italic text-lg sm:text-xl text-moss font-semibold tracking-wider mb-5">
+              We care, We share!
+            </p>
+
+            <p class="text-base sm:text-lg text-earth leading-relaxed max-w-xl mx-auto lg:mx-0 mb-8">
+              欢迎翻开<strong>中山市邻舍社会工作服务中心</strong>十周年温情画卷。十年来，我们从一件闲置旧衣出发，用温暖的社区循环，让环保成为邻里之间相亲相爱的日常。
+            </p>
+
+            <!-- 双主行动按钮 -->
+            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+              <a href="#matrix" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full bg-gradient-to-r from-moss to-moss-soft text-white font-medium shadow-lg hover:shadow-glowMoss hover:-translate-y-0.5 transition-all">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+                <span>探索生态循环</span>
+              </a>
+              <a href="#timeline" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full bg-paper-cream text-earth-deep font-medium border-2 border-earth/20 hover:border-sun hover:bg-sun-pale/50 transition-all shadow-sm">
+                <svg class="w-5 h-5 text-sun-deep" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+                <span>开启十年绘本之旅</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- 右侧：手绘水彩风邻里社区插画 + 活灵活现的“衣物银行”品牌吉祥物 -->
+          <div class="lg:col-span-6 relative">
+            <div class="relative mx-auto max-w-lg lg:max-w-none">
+              <!-- 水彩画框底衬 -->
+              <div class="storybook-card p-4 sm:p-6 bg-gradient-to-b from-paper-cream via-sun-pale/30 to-moss-light/20 relative overflow-hidden">
+                <!-- 10周年手绘印章 -->
+                <div class="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-sun-pale/90 border-2 border-dashed border-sun-deep/60 flex flex-col items-center justify-center shadow-sm rotate-12">
+                  <span class="font-storybook text-2xl sm:text-3xl text-sun-deep leading-none">10</span>
+                  <span class="text-[11px] font-serif text-earth-deep font-bold mt-0.5">周年纪念</span>
+                  <span class="text-[9px] text-moss-deep">2016·2026</span>
+                </div>
+
+                <!-- 定制原创水彩风社区封面 + 衣物银行吉祥物 SVG -->
+                <svg viewBox="0 0 540 420" class="w-full h-auto drop-shadow-sm" role="img" aria-label="邻舍10周年绘本封面插画与衣物银行吉祥物">
+                  <defs>
+                    <linearGradient id="skyWash" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#E4F1F0" stop-opacity="0.85"/>
+                      <stop offset="55%" stop-color="#FDF3D7" stop-opacity="0.75"/>
+                      <stop offset="100%" stop-color="#FAF6EE" stop-opacity="0.9"/>
+                    </linearGradient>
+                    <linearGradient id="meadowWash" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#C8DEB9"/>
+                      <stop offset="50%" stop-color="#DAE7B5"/>
+                      <stop offset="100%" stop-color="#B5CFA8"/>
+                    </linearGradient>
+                    <linearGradient id="boxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#FFFFFF"/>
+                      <stop offset="100%" stop-color="#F2EFE8"/>
+                    </linearGradient>
+                    <filter id="softBlur" x="-20%" y="-20%" width="140%" height="140%">
+                      <feGaussianBlur stdDeviation="6"/>
+                    </filter>
+                  </defs>
+
+                  <!-- 水彩天空与太阳光晕 -->
+                  <rect x="8" y="8" width="524" height="404" rx="28" fill="url(#skyWash)"/>
+                  <circle cx="115" cy="95" r="46" fill="#F4D06F" opacity="0.45" filter="url(#softBlur)"/>
+                  <circle cx="115" cy="95" r="28" fill="#F4D06F" opacity="0.65"/>
+
+                  <!-- 柔和云朵 -->
+                  <g fill="#FFFDF8" opacity="0.88">
+                    <path d="M185 88 C185 76 198 68 212 72 C220 62 240 62 248 74 C260 74 268 82 266 92 C264 100 254 102 246 102 L196 102 C188 102 185 95 185 88 Z"/>
+                    <path d="M350 72 C350 63 360 58 370 61 C376 53 391 53 397 62 C406 62 412 68 410 75 C408 81 400 83 394 83 L358 83 C352 83 350 78 350 72 Z"/>
+                  </g>
+
+                  <!-- 远山与中山城市社区天际线剪影 -->
+                  <path d="M16 285 Q110 210 220 255 T430 242 T524 275 L524 340 L16 340 Z" fill="#A8DADC" opacity="0.35"/>
+
+                  <!-- 左侧温暖社区小屋与大树 -->
+                  <g transform="translate(36, 185)" stroke="#6D523E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- 大树 -->
+                    <path d="M46 112 L46 66" stroke="#7A5B44" stroke-width="7"/>
+                    <circle cx="46" cy="48" r="30" fill="#7EA172" stroke="none" opacity="0.88"/>
+                    <circle cx="28" cy="56" r="20" fill="#5F8D4E" stroke="none" opacity="0.82"/>
+                    <circle cx="65" cy="58" r="21" fill="#B5CFA8" stroke="none" opacity="0.85"/>
+                    <circle cx="38" cy="44" r="4" fill="#F4D06F" stroke="none"/>
+                    <circle cx="58" cy="52" r="3.5" fill="#E07A5F" stroke="none"/>
+                    <!-- 小房子1 -->
+                    <rect x="74" y="64" width="66" height="54" rx="4" fill="#FFFDF8"/>
+                    <path d="M68 66 L107 34 L146 66 Z" fill="#E07A5F" opacity="0.85"/>
+                    <rect x="98" y="88" width="18" height="30" rx="3" fill="#E5A93C" opacity="0.8"/>
+                    <rect x="82" y="74" width="12" height="12" rx="2" fill="#A8DADC"/>
+                    <rect x="120" y="74" width="12" height="12" rx="2" fill="#A8DADC"/>
+                  </g>
+
+                  <!-- 右侧社区小建筑与蒲公英花茎 -->
+                  <g transform="translate(365, 195)" stroke="#6D523E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="14" y="50" width="54" height="62" rx="4" fill="#FDF3D7"/>
+                    <path d="M8 52 L41 24 L74 52 Z" fill="#7EA172"/>
+                    <rect x="24" y="64" width="11" height="12" rx="2" fill="#FFFDF8"/>
+                    <rect x="46" y="64" width="11" height="12" rx="2" fill="#FFFDF8"/>
+                    <rect x="34" y="88" width="14" height="24" rx="2" fill="#9A7B63"/>
+                    <!-- 温暖饭堂冒热气小窗 -->
+                    <path d="M90 112 L90 74 L132 74 L132 112 Z" fill="#FFFDF8"/>
+                    <path d="M84 74 L111 54 L138 74 Z" fill="#E5A93C"/>
+                    <path d="M104 46 Q102 38 106 32" stroke="#E07A5F" stroke-width="1.8" fill="none" opacity="0.7"/>
+                    <path d="M114 44 Q112 36 116 30" stroke="#E07A5F" stroke-width="1.8" fill="none" opacity="0.7"/>
+                  </g>
+
+                  <!-- 温暖草地前景 -->
+                  <path d="M8 310 Q145 276 275 304 T532 296 L532 412 L8 412 Z" fill="url(#meadowWash)"/>
+                  <!-- 草地石板 -->
+                  <ellipse cx="272" cy="368" rx="92" ry="20" fill="#B6A58A" opacity="0.65" stroke="#6D523E" stroke-width="1.5"/>
+
+                  <!-- 盛开的野花与嫩芽 -->
+                  <g class="animate-sway" transform="translate(88, 336)">
+                    <path d="M0 24 Q-3 10 0 0" stroke="#5F8D4E" stroke-width="2.2" fill="none"/>
+                    <circle cx="0" cy="-2" r="5" fill="#F4D06F"/>
+                    <circle cx="0" cy="-2" r="2" fill="#E07A5F"/>
+                  </g>
+                  <g class="animate-sway" transform="translate(442, 334)">
+                    <path d="M0 26 Q4 12 0 0" stroke="#5F8D4E" stroke-width="2.2" fill="none"/>
+                    <circle cx="0" cy="-2" r="5.5" fill="#FFFDF8" stroke="#E5A93C" stroke-width="1.4"/>
+                    <circle cx="0" cy="-2" r="2.2" fill="#E5A93C"/>
+                  </g>
+                  <g transform="translate(132, 354)">
+                    <path d="M0 16 L0 2" stroke="#5F8D4E" stroke-width="2"/>
+                    <circle cx="0" cy="0" r="4" fill="#E07A5F" opacity="0.8"/>
+                  </g>
+
+                  <!-- ========================================= -->
+                  <!-- 定制原创“衣物银行”卡通吉祥物（高度还原绘本） -->
+                  <!-- ========================================= -->
+                  <g class="animate-mascot-float" transform="translate(152, 82)">
+                    <!-- 飘出的小爱心 -->
+                    <path class="animate-heart-1" d="M22 44 C18 38 10 40 12 46 C14 52 22 56 22 56 C22 56 30 52 32 46 C34 40 26 38 22 44 Z" fill="#E07A5F"/>
+                    <path class="animate-heart-2" d="M40 24 C37 20 32 21 33 25 C34 29 40 32 40 32 C40 32 46 29 47 25 C48 21 43 20 40 24 Z" fill="#F4D06F"/>
+
+                    <!-- 左侧挥手小手臂（带绿色袖臂与白手套） -->
+                    <g class="animate-mascot-wave">
+                      <path d="M158 118 Q186 108 196 80" stroke="#4D8A6B" stroke-width="11" stroke-linecap="round" fill="none"/>
+                      <path d="M158 118 Q186 108 196 80" stroke="#3D6133" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.35"/>
+                      <!-- 白手套挥手 -->
+                      <g transform="translate(185, 58)">
+                        <path d="M6 20 C2 14 2 6 8 6 C11 6 12 10 12 10 C12 4 17 2 20 5 C22 7 20 11 20 11 C23 7 28 8 28 12 C28 16 24 22 20 26 C15 29 9 27 6 20 Z" fill="#FFFDF8" stroke="#4A392C" stroke-width="2.2" stroke-linejoin="round"/>
+                      </g>
+                    </g>
+
+                    <!-- 左手与提着的白色闲置衣物包 -->
+                    <g>
+                      <path d="M58 120 Q32 132 26 154" stroke="#4D8A6B" stroke-width="11" stroke-linecap="round" fill="none"/>
+                      <!-- 白色环保衣物布袋 -->
+                      <path d="M14 152 Q6 176 14 196 C22 208 42 206 48 194 C54 180 46 158 38 152 Z" fill="#FFFDF8" stroke="#4A392C" stroke-width="2.2"/>
+                      <path d="M22 152 Q26 140 32 152" stroke="#4A392C" stroke-width="2.2" fill="none"/>
+                      <path d="M20 176 Q30 182 40 174" stroke="#7EA172" stroke-width="2" fill="none" stroke-linecap="round"/>
+                      <!-- 左白手套 -->
+                      <circle cx="26" cy="153" r="9" fill="#FFFDF8" stroke="#4A392C" stroke-width="2.2"/>
+                    </g>
+
+                    <!-- 绿色双腿与白绿运动鞋 -->
+                    <g stroke="#4A392C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <!-- 左腿 -->
+                      <path d="M88 222 L84 256" stroke="#4D8A6B" stroke-width="11"/>
+                      <!-- 左运动鞋 -->
+                      <path d="M60 268 C60 256 76 250 92 254 L96 268 C96 274 88 276 76 276 C64 276 60 273 60 268 Z" fill="#FFFDF8"/>
+                      <path d="M62 271 Q78 275 95 270" stroke="#5F8D4E" stroke-width="3.2" fill="none"/>
+                      <!-- 右腿（迈步感） -->
+                      <path d="M132 222 L144 254" stroke="#4D8A6B" stroke-width="11"/>
+                      <!-- 右运动鞋 -->
+                      <path d="M132 264 C132 252 148 248 164 254 C170 257 170 268 160 272 C148 276 132 272 132 264 Z" fill="#FFFDF8"/>
+                      <path d="M134 267 Q150 273 166 266" stroke="#5F8D4E" stroke-width="3.2" fill="none"/>
+                    </g>
+
+                    <!-- 回收箱立体箱体（正面+侧面） -->
+                    <g stroke="#4A392C" stroke-width="2.5" stroke-linejoin="round">
+                      <!-- 右侧立体面 -->
+                      <path d="M154 44 L172 52 L166 218 L148 228 Z" fill="#E6E1D5"/>
+                      <!-- 主正面箱体 -->
+                      <path d="M60 44 L154 44 L148 228 L56 224 Z" fill="url(#boxGrad)"/>
+                      <!-- 屋檐顶盖 -->
+                      <path d="M50 44 L62 22 L158 22 L176 48 L154 48 L50 48 Z" fill="#FAF6EE"/>
+                      <!-- 顶盖文字“衣物银行” -->
+                      <text x="108" y="40" text-anchor="middle" font-size="14" font-weight="700" fill="#3D6133" stroke="none" font-family="'Noto Serif SC', serif" letter-spacing="2">衣物银行</text>
+
+                      <!-- 投衣口表情脸框 -->
+                      <rect x="68" y="58" width="76" height="66" rx="10" fill="#FFFDF8" stroke="#6D523E" stroke-width="2"/>
+                      <!-- 大眼睛 -->
+                      <ellipse cx="90" cy="84" rx="9" ry="11" fill="#3B2B22" stroke="none"/>
+                      <circle cx="87" cy="80" r="3.4" fill="#FFFFFF" stroke="none"/>
+                      <circle cx="93" cy="88" r="1.6" fill="#FFFFFF" stroke="none"/>
+                      <ellipse cx="124" cy="84" rx="9" ry="11" fill="#3B2B22" stroke="none"/>
+                      <circle cx="121" cy="80" r="3.4" fill="#FFFFFF" stroke="none"/>
+                      <circle cx="127" cy="88" r="1.6" fill="#FFFFFF" stroke="none"/>
+                      <!-- 温暖腮红 -->
+                      <ellipse cx="77" cy="96" rx="5.5" ry="3.2" fill="#F29E8E" opacity="0.7" stroke="none"/>
+                      <ellipse cx="137" cy="96" rx="5.5" ry="3.2" fill="#F29E8E" opacity="0.7" stroke="none"/>
+                      <!-- 灿烂微笑嘴巴 -->
+                      <path d="M98 98 Q107 114 116 98 Z" fill="#E07A5F" stroke="#4A392C" stroke-width="1.8"/>
+                      <path d="M102 104 Q107 109 112 104" fill="#F5C4B6" stroke="none"/>
+
+                      <!-- 箱体下半部分：中山社区风景画框 -->
+                      <rect x="68" y="136" width="74" height="76" rx="8" fill="#EEF7EE" stroke="#6D523E" stroke-width="1.8"/>
+                      <!-- 风景小山、绿地与红心 -->
+                      <path d="M70 192 Q90 168 110 184 T140 176 L140 210 L70 210 Z" fill="#B5CFA8" stroke="none"/>
+                      <path d="M70 202 Q105 188 140 200 L140 210 L70 210 Z" fill="#7EA172" stroke="none"/>
+                      <path d="M98 158 C95 153 88 155 90 160 C92 165 98 168 98 168 C98 168 104 165 106 160 C108 155 101 153 98 158 Z" fill="#E07A5F" stroke="none"/>
+                      <text x="122" y="168" font-size="11" font-weight="700" fill="#4A392C" stroke="none" font-family="'Ma Shan Zheng', cursive">中山</text>
+                      <rect x="82" y="188" width="46" height="14" rx="4" fill="#FFFDF8" stroke="#5F8D4E" stroke-width="1.2"/>
+                      <text x="105" y="198" text-anchor="middle" font-size="8.5" fill="#3D6133" stroke="none" font-weight="600">乐在分享</text>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 底部：动态数字增长核心影响力徽章 -->
+        <div class="mt-14 sm:mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div class="storybook-card p-5 text-center bg-paper-cream/95">
+            <div class="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-sun-pale text-sun-deep mb-3">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            </div>
+            <div class="font-storybook text-3xl sm:text-4xl text-earth-deep">
+              <span class="counter" data-target="10">0</span><span class="text-xl text-sun-deep ml-0.5">年</span>
+            </div>
+            <p class="text-xs sm:text-sm text-earth-light mt-1">公益初心坚守 (2016-2026)</p>
+          </div>
+
+          <div class="storybook-card p-5 text-center bg-paper-cream/95">
+            <div class="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-moss-light/35 text-moss-deep mb-3">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c4-4 8-7.5 8-12a8 8 0 1 0-16 0c0 4.5 4 8 8 12Z"/><path d="M12 13V7"/><path d="M12 10l3-2"/></svg>
+            </div>
+            <div class="font-storybook text-3xl sm:text-4xl text-moss-deep">
+              <span class="text-base font-sans text-earth-light mr-0.5">近</span><span class="counter" data-target="4268">0</span><span class="text-xl text-moss ml-0.5">吨</span>
+            </div>
+            <p class="text-xs sm:text-sm text-earth-light mt-1">累计回收闲置衣物</p>
+          </div>
+
+          <div class="storybook-card p-5 text-center bg-paper-cream/95">
+            <div class="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-blossom-light/40 text-blossom mb-3">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            </div>
+            <div class="font-storybook text-3xl sm:text-4xl text-earth-deep">
+              <span class="counter" data-target="20">0</span><span class="text-xl text-blossom ml-0.5">万人次</span>
+            </div>
+            <p class="text-xs sm:text-sm text-earth-light mt-1">爱心温暖惠及受助人群</p>
+          </div>
+
+          <div class="storybook-card p-5 text-center bg-paper-cream/95">
+            <div class="inline-flex items-center justify-center w-11 h-11 rounded-2xl bg-aqua-pale text-aqua-deep mb-3">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="font-storybook text-3xl sm:text-4xl text-aqua-deep">
+              <span class="counter" data-target="18">0</span><span class="text-xl text-aqua-deep ml-0.5">省市</span>
+            </div>
+            <p class="text-xs sm:text-sm text-earth-light mt-1">温暖足迹覆盖省、市、自治区</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 3. 关于邻舍 & 种树人（播下一颗环保与分享的种子） -->
+    <!-- ========================================================= -->
+    <section id="about" class="py-16 sm:py-24 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- 板块标题 -->
+        <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16 reveal">
+          <span class="inline-block px-4 py-1 rounded-full bg-moss-light/30 text-moss-deep text-xs font-semibold tracking-widest uppercase mb-3">Chapter 01 · 初心萌芽</span>
+          <h2 class="font-storybook text-3xl sm:text-4xl text-earth-deep mb-3">
+            播下一颗<span class="watercolor-underline">环保与分享</span>的种子
+          </h2>
+          <p class="text-earth-light text-sm sm:text-base">从一念善意到十年深耕，让公益如春风化雨般融入城市肌理。</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          <!-- 左侧：关于邻舍机构介绍卡 -->
+          <div class="lg:col-span-6 reveal">
+            <div class="storybook-card p-6 sm:p-8 h-full flex flex-col justify-between bg-gradient-to-br from-paper-cream via-paper-cream to-moss-light/15">
+              <div>
+                <div class="flex items-center gap-3 mb-5">
+                  <div class="w-12 h-12 rounded-2xl bg-moss/15 border border-moss/30 flex items-center justify-center">
+                    <svg class="w-7 h-7 text-moss-deep" viewBox="0 0 36 36" fill="none">
+                      <path d="M18 30V16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                      <path d="M18 22C11 21 8 15 9 10C14 10 18 15 18 22Z" fill="#7EA172" stroke="currentColor" stroke-width="1.8"/>
+                      <path d="M18 19C25 18 28 12 27 7C22 7 18 12 18 19Z" fill="#B5CFA8" stroke="currentColor" stroke-width="1.8"/>
+                      <path d="M10 30H26" stroke="#6D523E" stroke-width="2.2" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="font-serif text-xl sm:text-2xl font-bold text-earth-deep">关于邻舍 · COMMUNITY SERVICE</h3>
+                    <p class="text-xs text-moss-deep font-medium">中山市邻舍社会工作服务中心</p>
+                  </div>
+                </div>
+
+                <p class="text-earth leading-relaxed mb-5 text-sm sm:text-base">
+                  <strong>中山市邻舍社会工作服务中心（简称“邻舍”）</strong>成立于 <strong>2016 年</strong>，是一家致力于推动环境保护、提升市民环保素养的民办非企业单位。
+                </p>
+
+                <!-- 理念引文框 -->
+                <div class="handdrawn-tag p-5 mb-6 relative">
+                  <div class="flex items-center gap-2 text-moss-deep font-serif font-bold text-lg mb-1">
+                    <span>“We care, We share!”</span>
+                    <span class="text-xs px-2.5 py-0.5 rounded-full bg-sun-pale text-sun-deep font-sans">专注环保 · 乐在分享</span>
+                  </div>
+                  <p class="text-sm text-earth leading-relaxed">
+                    让更多的中山市民参与到环境保护、闲余物品分享循环利用当中；营造如“邻舍”般互帮互助、相亲相爱的社会氛围。
+                  </p>
+                </div>
+              </div>
+
+              <!-- 底部手绘三颗种子核心价值 -->
+              <div class="grid grid-cols-3 gap-3 pt-4 border-t border-earth/10">
+                <div class="text-center p-3 rounded-2xl bg-moss-light/20">
+                  <div class="font-storybook text-lg text-moss-deep">绿色循环</div>
+                  <div class="text-[11px] text-earth-light mt-0.5">闲置再生减碳</div>
+                </div>
+                <div class="text-center p-3 rounded-2xl bg-sun-pale/60">
+                  <div class="font-storybook text-lg text-sun-deep">邻里互助</div>
+                  <div class="text-[11px] text-earth-light mt-0.5">相亲相爱社区</div>
+                </div>
+                <div class="text-center p-3 rounded-2xl bg-aqua-pale/70">
+                  <div class="font-storybook text-lg text-aqua-deep">专业闭环</div>
+                  <div class="text-[11px] text-earth-light mt-0.5">透明数据赋能</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 右侧：种树人——负责人冯峻峰故事卡 -->
+          <div class="lg:col-span-6 reveal">
+            <div class="storybook-card p-6 sm:p-8 h-full bg-gradient-to-br from-paper-cream via-sun-pale/25 to-paper-kraft/50 flex flex-col justify-between">
+              <div class="flex flex-col sm:flex-row gap-6 items-center sm:items-start">
+                <!-- 手绘风种树人浇灌树苗插画 -->
+                <div class="shrink-0 w-40 h-44 rounded-3xl bg-gradient-to-b from-aqua-pale/70 via-sun-pale/50 to-moss-light/40 border-2 border-earth/15 p-2 shadow-inner relative overflow-hidden">
+                  <svg viewBox="0 0 160 180" class="w-full h-full" role="img" aria-label="种树人冯峻峰浇灌希望之树插画">
+                    <!-- 温暖太阳 -->
+                    <circle cx="128" cy="30" r="18" fill="#F4D06F" opacity="0.75"/>
+                    <!-- 草地山丘 -->
+                    <path d="M0 140 Q80 120 160 144 L160 180 L0 180 Z" fill="#B5CFA8"/>
+                    <!-- 成长中的大树苗 -->
+                    <g transform="translate(96, 54)">
+                      <path d="M22 92 Q20 62 22 38" stroke="#6D523E" stroke-width="5.5" stroke-linecap="round" fill="none"/>
+                      <path d="M22 60 Q8 48 12 36 Q24 40 22 60 Z" fill="#5F8D4E"/>
+                      <path d="M22 50 Q38 40 34 26 Q22 32 22 50 Z" fill="#7EA172"/>
+                      <circle cx="22" cy="24" r="16" fill="#7EA172" opacity="0.9"/>
+                      <circle cx="11" cy="32" r="10" fill="#B5CFA8" opacity="0.88"/>
+                      <circle cx="34" cy="32" r="11" fill="#5F8D4E" opacity="0.85"/>
+                      <!-- 树冠爱心果实 -->
+                      <circle cx="18" cy="20" r="3" fill="#F4D06F"/>
+                      <circle cx="28" cy="28" r="2.8" fill="#E07A5F"/>
+                    </g>
+                    <!-- 人物剪影：亲切微笑的种树人 -->
+                    <g transform="translate(22, 56)" stroke="#4A392C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <!-- 头发与圆脸 -->
+                      <circle cx="32" cy="24" r="16" fill="#FDE6CE"/>
+                      <path d="M16 22 C16 10 26 6 35 7 C44 8 49 14 48 22 C43 16 24 15 16 22 Z" fill="#4A392C"/>
+                      <!-- 微笑眼镜与眉眼 -->
+                      <circle cx="27" cy="24" r="4" fill="#FFFDF8" stroke-width="1.4"/>
+                      <circle cx="38" cy="24" r="4" fill="#FFFDF8" stroke-width="1.4"/>
+                      <line x1="31" y1="24" x2="34" y2="24" stroke-width="1.4"/>
+                      <path d="M29 32 Q32.5 35 36 32" fill="none" stroke-width="1.6"/>
+                      <!-- 绿色志愿马甲与身体 -->
+                      <path d="M16 44 C16 38 48 38 48 44 L52 84 L12 84 Z" fill="#5F8D4E"/>
+                      <path d="M27 40 L32 54 L37 40" fill="#FFFDF8" stroke="none"/>
+                      <!-- 拿着水壶浇灌 -->
+                      <path d="M46 56 L66 64" stroke="#4A392C" stroke-width="5"/>
+                      <rect x="60" y="54" width="18" height="15" rx="4" fill="#89B0AE"/>
+                      <path d="M78 60 L89 54" stroke="#557D7B" stroke-width="3"/>
+                      <!-- 晶莹水滴 -->
+                      <circle cx="94" cy="60" r="2" fill="#89B0AE" stroke="none"/>
+                      <circle cx="98" cy="68" r="2.2" fill="#89B0AE" stroke="none"/>
+                      <circle cx="93" cy="75" r="1.8" fill="#89B0AE" stroke="none"/>
+                    </g>
+                  </svg>
+                  <div class="absolute bottom-2 inset-x-2 text-center py-0.5 rounded-full bg-paper-cream/90 text-[11px] font-serif font-bold text-earth-deep shadow-sm">
+                    种树人 · 冯峻峰
+                  </div>
+                </div>
+
+                <!-- 故事文字 -->
+                <div class="flex-1 text-center sm:text-left">
+                  <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sun-pale text-sun-deep text-xs font-semibold mb-2">
+                    <span>“衣·物银行”项目发起人</span>
+                    <span>·</span>
+                    <span>邻舍理事长</span>
+                  </div>
+                  <h3 class="font-serif text-2xl font-bold text-earth-deep mb-3">种树人：冯峻峰</h3>
+                  <p class="text-sm sm:text-base text-earth leading-relaxed mb-4">
+                    作为“衣·物银行”环保项目发起人及邻舍社会工作服务中心理事长，冯峻峰始终坚守<strong>“朴素起步，开启公益探索”</strong>的初心。
+                  </p>
+                  <p class="text-sm sm:text-base text-earth leading-relaxed">
+                    从 <strong>2012 年</strong>最初的纯民间慈善尝试，到带领团队走向<strong>专业化、规模化、数据化</strong>的闭环模式，他将一个简单的物品回收想法，一步步培育成了惠及全国近 <strong>20 万人次</strong>的全域生态环保与社区关怀矩阵。
+                  </p>
+                </div>
+              </div>
+
+              <!-- 底部手写感座右铭 -->
+              <div class="mt-6 pt-4 border-t border-earth/10 flex flex-wrap items-center justify-between gap-3">
+                <p class="font-brush text-xl sm:text-2xl text-moss-deep">“朴素起步，开启公益探索”</p>
+                <span class="text-xs px-3 py-1 rounded-full bg-paper-cream border border-earth/15 text-earth-light">2012 启程 → 2026 枝繁叶茂</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 4. 岁月年轮：2012–2025 交互式十年成长路径（草地石阶绘本风） -->
+    <!-- ========================================================= -->
+    <section id="timeline" class="py-16 sm:py-24 relative bg-gradient-to-b from-transparent via-sun-pale/25 to-transparent">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- 板块标题 -->
+        <div class="text-center max-w-3xl mx-auto mb-10 reveal">
+          <span class="inline-block px-4 py-1 rounded-full bg-sun-pale text-sun-deep text-xs font-semibold tracking-widest uppercase mb-3">Chapter 02 · 岁月年轮</span>
+          <h2 class="font-storybook text-3xl sm:text-4xl text-earth-deep mb-3">
+            岁月年轮：<span class="watercolor-underline">十年成长足迹</span>
+          </h2>
+          <p class="text-earth-light text-sm sm:text-base">
+            点击蜿蜒草地上的每一块发光年份石阶，跟随“衣物银行”小伙伴一起重温 2012 至 2025+ 的温暖里程碑。
+          </p>
+        </div>
+
+        <!-- 阶段切换 Tabs -->
+        <div class="flex flex-wrap justify-center gap-2.5 sm:gap-3 mb-8 reveal">
+          <button onclick="setTimelinePhase('upper')" id="tab-upper" class="timeline-tab px-5 py-2.5 rounded-full text-sm font-medium transition-all border">
+            🌱 上半程：朴素起步到专业化探索 (2012–2019)
+          </button>
+          <button onclick="setTimelinePhase('lower')" id="tab-lower" class="timeline-tab px-5 py-2.5 rounded-full text-sm font-medium transition-all border">
+            🍂 下半程：深耕全域生态与社区关怀 (2020–2025+)
+          </button>
+          <button onclick="setTimelinePhase('all')" id="tab-all" class="timeline-tab px-5 py-2.5 rounded-full text-sm font-medium transition-all border">
+            ✨ 十年全景年轮
+          </button>
+        </div>
+
+        <!-- 交互式绘本石阶画布容器 -->
+        <div class="storybook-card p-5 sm:p-8 bg-gradient-to-br from-[#F4F8EC] via-[#FDF7E6] to-[#F7ECDA] relative overflow-hidden reveal">
+          <!-- 当前阶段副标题 -->
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+            <div>
+              <h3 id="timeline-phase-title" class="font-serif text-lg sm:text-xl font-bold text-earth-deep">上半程：从朴素起步到专业化探索</h3>
+              <p class="text-xs sm:text-sm text-earth-light">点击任意年份石阶或使用左右按钮漫步十年历程</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="stepTimeline(-1)" aria-label="上一个年份" class="w-10 h-10 rounded-full bg-paper-cream border border-earth/20 flex items-center justify-center text-earth-deep hover:bg-moss hover:text-white transition-colors shadow-sm">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m15 18-6-6 6-6"/></svg>
+              </button>
+              <button onclick="stepTimeline(1)" aria-label="下一个年份" class="w-10 h-10 rounded-full bg-paper-cream border border-earth/20 flex items-center justify-center text-earth-deep hover:bg-moss hover:text-white transition-colors shadow-sm">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 18 6-6-6-6"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- 蜿蜒草地石阶路径（响应式横向可滚动，桌面全展开） -->
+          <div class="relative overflow-x-auto no-scrollbar pb-4">
+            <div id="stepping-stones-container" class="relative min-w-[680px] py-10 px-4">
+              <!-- 背景蜿蜒水彩草地路径 SVG -->
+              <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1000 180" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M20 120 Q220 155 450 95 T980 75" stroke="#D2E0B9" stroke-width="52" stroke-linecap="round" fill="none" opacity="0.55"/>
+                <path d="M20 120 Q220 155 450 95 T980 75" stroke="#89B0AE" stroke-width="3" stroke-dasharray="8 10" stroke-linecap="round" fill="none" opacity="0.55"/>
+              </svg>
+
+              <!-- 动态石阶节点行（由 JS 渲染） -->
+              <div id="timeline-nodes" class="relative z-10 flex items-center justify-between gap-4"></div>
+            </div>
+          </div>
+
+          <!-- 选中年份的绘本木牌详情卡 -->
+          <div id="timeline-detail-card" class="mt-4 handdrawn-tag p-6 sm:p-7 transition-all duration-300">
+            <!-- JS 填充选中年份详情 -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 5. 邻里小镇：七大核心项目互动体验区 -->
+    <!-- ========================================================= -->
+    <section id="town" class="py-16 sm:py-24 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- 板块标题 -->
+        <div class="text-center max-w-3xl mx-auto mb-12 reveal">
+          <span class="inline-block px-4 py-1 rounded-full bg-aqua-pale text-aqua-deep text-xs font-semibold tracking-widest uppercase mb-3">Chapter 03 · 邻里小镇</span>
+          <h2 class="font-storybook text-3xl sm:text-4xl text-earth-deep mb-3">
+            邻里小镇：<span class="watercolor-underline">七大核心项目</span>勾勒美好社区
+          </h2>
+          <p class="text-earth-light text-sm sm:text-base">
+            点击手绘小镇地标或下方项目卡片，探索邻舍如何以七大温暖项目编织绿色、互助的社区生活图景。
+          </p>
+        </div>
+
+        <!-- 互动手绘邻里小镇全景图 + 右侧实时详情面板 -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-7 mb-10 items-stretch reveal">
+          <!-- 手绘小镇地标场景 SVG -->
+          <div class="lg:col-span-7 storybook-card p-4 sm:p-5 bg-gradient-to-b from-aqua-pale/45 via-paper-cream to-moss-light/25 flex flex-col justify-between">
+            <div class="flex items-center justify-between px-2 mb-2">
+              <span class="text-xs font-semibold text-moss-deep flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-moss animate-ping"></span>
+                互动手绘地图 · 点击小镇任意地标探索
+              </span>
+              <span class="text-xs text-earth-light">中山温暖社区图景</span>
+            </div>
+
+            <svg id="town-map-svg" viewBox="0 0 680 390" class="w-full h-auto rounded-2xl" role="img" aria-label="邻里小镇七大核心项目手绘交互地图">
+              <defs>
+                <linearGradient id="townSky" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#E6F4F3"/>
+                  <stop offset="65%" stop-color="#FDF7E7"/>
+                  <stop offset="100%" stop-color="#E1EDD4"/>
+                </linearGradient>
+                <linearGradient id="riverGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#A8DADC"/>
+                  <stop offset="100%" stop-color="#89B0AE"/>
+                </linearGradient>
+              </defs>
+
+              <!-- 天空与丘陵草地 -->
+              <rect width="680" height="390" rx="20" fill="url(#townSky)"/>
+              <circle cx="595" cy="58" r="28" fill="#F4D06F" opacity="0.72"/>
+              <path d="M0 240 Q170 185 360 225 T680 205 L680 390 L0 390 Z" fill="#D5E5C2"/>
+              <path d="M0 295 Q210 250 430 295 T680 278 L680 390 L0 390 Z" fill="#C2D9AE"/>
+
+              <!-- 蜿蜒珠江/海岸水系与小镇步道 -->
+              <path d="M460 245 Q540 278 510 335 T680 370 L680 390 L440 390 Q465 320 430 270 Z" fill="url(#riverGrad)" opacity="0.78"/>
+              <path d="M55 340 Q190 270 330 285 T510 220" stroke="#F4E7CF" stroke-width="26" stroke-linecap="round" fill="none"/>
+              <path d="M55 340 Q190 270 330 285 T510 220" stroke="#D4BFA0" stroke-width="2" stroke-dasharray="6 8" fill="none"/>
+
+              <!-- 7个可点击手绘地标组 -->
+              <!-- 1. 衣物银行 -->
+              <g class="town-pin cursor-pointer transition-transform" data-project="0" onclick="selectTownProject(0)" transform="translate(88, 175)">
+                <ellipse cx="32" cy="72" rx="34" ry="10" fill="#5F8D4E" opacity="0.22"/>
+                <rect x="8" y="12" width="48" height="58" rx="8" fill="#FFFDF8" stroke="#4A392C" stroke-width="2.2"/>
+                <path d="M2 16 L32 2 L62 16 Z" fill="#5F8D4E" stroke="#4A392C" stroke-width="2"/>
+                <circle cx="24" cy="34" r="3" fill="#4A392C"/>
+                <circle cx="40" cy="34" r="3" fill="#4A392C"/>
+                <path d="M27 42 Q32 47 37 42" stroke="#E07A5F" stroke-width="2.2" fill="none"/>
+                <rect x="-8" y="74" width="80" height="22" rx="11" fill="#FFFDF8" stroke="#5F8D4E" stroke-width="1.8" class="pin-label-bg"/>
+                <text x="32" y="89" text-anchor="middle" font-size="11.5" font-weight="700" fill="#3D6133">衣物银行</text>
+              </g>
+
+              <!-- 2. 邻舍4S店 -->
+              <g class="town-pin cursor-pointer" data-project="1" onclick="selectTownProject(1)" transform="translate(205, 118)">
+                <ellipse cx="36" cy="68" rx="36" ry="9" fill="#E5A93C" opacity="0.2"/>
+                <rect x="8" y="22" width="56" height="44" rx="6" fill="#FDF3D7" stroke="#4A392C" stroke-width="2"/>
+                <path d="M4 24 L36 4 L68 24 Z" fill="#E5A93C" stroke="#4A392C" stroke-width="2"/>
+                <text x="36" y="49" text-anchor="middle" font-size="15" font-weight="800" fill="#6D523E">4S</text>
+                <rect x="-6" y="70" width="84" height="22" rx="11" fill="#FFFDF8" stroke="#E5A93C" stroke-width="1.8" class="pin-label-bg"/>
+                <text x="36" y="85" text-anchor="middle" font-size="11.5" font-weight="700" fill="#6D523E">邻舍4S店</text>
+              </g>
+
+              <!-- 3. 环保研习社 -->
+              <g class="town-pin cursor-pointer" data-project="2" onclick="selectTownProject(2)" transform="translate(346, 98)">
+                <ellipse cx="38" cy="70" rx="38" ry="10" fill="#7EA172" opacity="0.22"/>
+                <rect x="6" y="22" width="64" height="44" rx="8" fill="#FFFDF8" stroke="#4A392C" stroke-width="2"/>
+                <path d="M2 24 L38 4 L74 24 Z" fill="#7EA172" stroke="#4A392C" stroke-width="2"/>
+                <!-- 书本与嫩芽图标 -->
+                <path d="M24 52 Q38 46 52 52" stroke="#5F8D4E" stroke-width="2.5" fill="none"/>
+                <path d="M38 48 V34 M38 40 Q30 35 32 30 Q38 33 38 40 M38 38 Q46 33 44 28 Q38 31 38 38" stroke="#3D6133" stroke-width="1.8" fill="#B5CFA8"/>
+                <rect x="-8" y="70" width="92" height="22" rx="11" fill="#FFFDF8" stroke="#7EA172" stroke-width="1.8" class="pin-label-bg"/>
+                <text x="38" y="85" text-anchor="middle" font-size="11.5" font-weight="700" fill="#3D6133">环保研习社</text>
+              </g>
+
+              <!-- 4. 壹起分 -->
+              <g class="town-pin cursor-pointer" data-project="3" onclick="selectTownProject(3)" transform="translate(490, 122)">
+                <ellipse cx="34" cy="66" rx="34" ry="9" fill="#89B0AE" opacity="0.25"/>
+                <!-- 分类四色小亭 -->
+                <rect x="6" y="30" width="13" height="30" rx="3" fill="#5F8D4E" stroke="#4A392C" stroke-width="1.5"/>
+                <rect x="21" y="30" width="13" height="30" rx="3" fill="#89B0AE" stroke="#4A392C" stroke-width="1.5"/>
+                <rect x="36" y="30" width="13" height="30" rx="3" fill="#E07A5F" stroke="#4A392C" stroke-width="1.5"/>
+                <rect x="51" y="30" width="13" height="30" rx="3" fill="#E5A93C" stroke="#4A392C" stroke-width="1.5"/>
+                <path d="M2 28 L35 12 L68 28 Z" fill="#FFFDF8" stroke="#4A392C" stroke-width="2"/>
+                <rect x="-4" y="66" width="76" height="22" rx="11" fill="#FFFDF8" stroke="#89B0AE" stroke-width="1.8" class="pin-label-bg"/>
+                <text x="34" y="81" text-anchor="middle" font-size="11.5" font-weight="700" fill="#557D7B">壹起分</text>
+              </g>
+
+              <!-- 5. 守护海岸 -->
+              <g class="town-pin cursor-pointer" data-project="4" onclick="selectTownProject(4)" transform="translate(532, 250)">
+                <ellipse cx="36" cy="66" rx="38" ry="10" fill="#557D7B" opacity="0.22"/>
+                <!-- 小灯塔与波浪 -->
+                <path d="M28 56 L33 16 L41 16 L46 56 Z" fill="#FFFDF8" stroke="#4A392C" stroke-width="2"/>
+                <path d="M31 32 H43 M30 44 H44" stroke="#E07A5F" stroke-width="3"/>
+                <circle cx="37" cy="14" r="5" fill="#F4D06F" stroke="#4A392C" stroke-width="1.6"/>
+                <path d="M10 60 Q24 53 38 60 T66 60" stroke="#557D7B" stroke-width="2.4" fill="none"/>
+                <rect x="-6" y="68" width="84" height="22" rx="11" fill="#FFFDF8" stroke="#557D7B" stroke-width="1.8" class="pin-label-bg"/>
+                <text x="36" y="83" text-anchor="middle" font-size="11.5" font-weight="700" fill="#557D7B">守护海岸</text>
+              </g>
+
+              <!-- 6. 爱心公益集市 -->
+              <g class="town-pin cursor-pointer" data-project="5" onclick="selectTownProject(5)" transform="translate(212, 258)">
+                <ellipse cx="38" cy="68" rx="40" ry="10" fill="#E07A5F" opacity="0.2"/>
+                <!-- 市集帐篷摊位 -->
+                <path d="M8 34 L16 14 L60 14 L68 34 Z" fill="#E07A5F" stroke="#4A392C" stroke-width="2"/>
+                <path d="M22 14 L20 34 M38 14 L38 34 M54 14 L56 34" stroke="#FFFDF8" stroke-width="3.5"/>
+                <rect x="14" y="34" width="48" height="28" fill="#FFFDF8" stroke="#4A392C" stroke-width="2"/>
+                <rect x="10" y="48" width="56" height="14" rx="3" fill="#F4D06F" stroke="#4A392C" stroke-width="1.8"/>
+                <rect x="-12" y="68" width="100" height="22" rx="11" fill="#FFFDF8" stroke="#E07A5F" stroke-width="1.8" class="pin-label-bg"/>
+                <text x="38" y="83" text-anchor="middle" font-size="11.5" font-weight="700" fill="#B54D33">爱心公益集市</text>
+              </g>
+
+              <!-- 7. 长者饭堂 -->
+              <g class="town-pin cursor-pointer" data-project="6" onclick="selectTownProject(6)" transform="translate(362, 240)">
+                <ellipse cx="38" cy="70" rx="40" ry="10" fill="#E5A93C" opacity="0.26"/>
+                <!-- 暖心屋与热腾腾饭碗 -->
+                <rect x="8" y="26" width="60" height="40" rx="8" fill="#FFFDF8" stroke="#4A392C" stroke-width="2"/>
+                <path d="M3 28 L38 6 L73 28 Z" fill="#E5A93C" stroke="#4A392C" stroke-width="2"/>
+                <!-- 温暖热汤碗 -->
+                <path d="M24 48 H52 C51 57 45 61 38 61 C31 61 25 57 24 48 Z" fill="#E07A5F" stroke="#4A392C" stroke-width="1.6"/>
+                <path d="M32 42 Q30 37 33 33 M38 41 Q36 35 39 31 M44 42 Q42 37 45 33" stroke="#E5A93C" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+                <rect x="-6" y="70" width="88" height="22" rx="11" fill="#FFFDF8" stroke="#E5A93C" stroke-width="1.8" class="pin-label-bg"/>
+                <text x="38" y="85" text-anchor="middle" font-size="11.5" font-weight="700" fill="#C4841D">长者饭堂</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- 右侧：当前选中项目的绘本详情卡片 -->
+          <div class="lg:col-span-5">
+            <div id="town-detail-panel" class="storybook-card p-6 sm:p-7 h-full flex flex-col justify-between bg-gradient-to-br from-paper-cream via-paper-cream to-sun-pale/25">
+              <!-- JS 动态渲染 -->
+            </div>
+          </div>
+        </div>
+
+        <!-- 底部：7大项目快速切换卡片网格 -->
+        <div id="town-cards-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3 reveal">
+          <!-- JS 动态渲染 -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 6. 生态矩阵：从一件旧衣到全域温暖的循环引擎（核心交互图解 + 计算器） -->
+    <!-- ========================================================= -->
+    <section id="matrix" class="py-16 sm:py-24 relative bg-gradient-to-b from-aqua-pale/25 via-paper to-moss-light/15">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- 板块标题 -->
+        <div class="text-center max-w-3xl mx-auto mb-12 reveal">
+          <span class="inline-block px-4 py-1 rounded-full bg-moss-light/35 text-moss-deep text-xs font-semibold tracking-widest uppercase mb-3">Chapter 04 · 生态矩阵</span>
+          <h2 class="font-storybook text-3xl sm:text-4xl text-earth-deep mb-3">
+            从一件旧衣到<span class="watercolor-underline">全域温暖</span>的循环引擎
+          </h2>
+          <p class="text-earth-light text-sm sm:text-base">
+            点击下方水流闭环中的任意环节，了解居民投放的一件闲置衣物如何流转增值，最终反哺“长者饭堂”与“环保研习社”。
+          </p>
+        </div>
+
+        <!-- 四步动态水流闭环交互图解 -->
+        <div class="storybook-card p-5 sm:p-8 mb-10 bg-paper-cream/95 reveal">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <!-- 左侧：还原绘本第7页的水流循环 SVG -->
+            <div class="lg:col-span-7">
+              <svg viewBox="0 0 600 430" class="w-full h-auto" role="img" aria-label="邻舍四步生态循环引擎交互流程图">
+                <defs>
+                  <linearGradient id="streamBlue" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#A8DADC"/>
+                    <stop offset="50%" stop-color="#89B0AE"/>
+                    <stop offset="100%" stop-color="#7EA172"/>
+                  </linearGradient>
+                  <linearGradient id="streamGold" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#F4D06F"/>
+                    <stop offset="100%" stop-color="#7EA172"/>
+                  </linearGradient>
+                </defs>
+
+                <!-- 柔和底色光晕 -->
+                <circle cx="300" cy="215" r="155" fill="#E4F1F0" opacity="0.4"/>
+                <circle cx="300" cy="215" r="115" fill="#FDF3D7" opacity="0.35"/>
+
+                <!-- 主闭环水彩水流路径 -->
+                <path d="M355 95 C475 110 515 215 445 295 C385 362 215 375 155 295 C98 220 135 115 245 95 C280 88 320 88 355 95 Z"
+                      fill="none" stroke="url(#streamBlue)" stroke-width="26" stroke-linecap="round" opacity="0.42"/>
+                <!-- 动态流向虚线 -->
+                <path d="M355 95 C475 110 515 215 445 295 C385 362 215 375 155 295 C98 220 135 115 245 95 C280 88 320 88 355 95 Z"
+                      fill="none" stroke="#5F8D4E" stroke-width="3.5" stroke-linecap="round" class="water-flow-line"/>
+
+                <!-- 中心核心徽章 -->
+                <g transform="translate(300, 215)">
+                  <circle r="54" fill="#FFFDF8" stroke="#E5A93C" stroke-width="2.5" stroke-dasharray="6 5"/>
+                  <text y="-8" text-anchor="middle" font-size="16" font-weight="700" fill="#3D6133" font-family="'Noto Serif SC', serif">善意循环</text>
+                  <text y="14" text-anchor="middle" font-size="11.5" fill="#6D523E">绿色 · 共享 · 反哺</text>
+                  <text y="32" text-anchor="middle" font-size="10" fill="#89B0AE">点击四周环节查看</text>
+                </g>
+
+                <!-- 步骤1：闲置流入（右上） -->
+                <g class="matrix-node cursor-pointer" data-step="0" onclick="selectMatrixStep(0)" transform="translate(360, 24)">
+                  <rect width="204" height="96" rx="20" fill="#FFFDF8" stroke="#5F8D4E" stroke-width="2.5" class="matrix-box"/>
+                  <!-- 小箱子与飞入衣物图标 -->
+                  <g transform="translate(16, 18)">
+                    <rect x="6" y="20" width="34" height="38" rx="6" fill="#EEF7EE" stroke="#4A392C" stroke-width="1.8"/>
+                    <path d="M2 22 L23 12 L44 22 Z" fill="#5F8D4E" stroke="#4A392C" stroke-width="1.6"/>
+                    <path d="M16 5 L23 11 L30 5" stroke="#E07A5F" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                  </g>
+                  <text x="72" y="34" font-size="12" font-weight="700" fill="#5F8D4E">STEP 01</text>
+                  <text x="72" y="56" font-size="16" font-weight="700" fill="#4A392C" font-family="'Noto Serif SC', serif">闲置流入</text>
+                  <text x="72" y="76" font-size="11" fill="#6D523E">居民闲置衣物投放区</text>
+                </g>
+
+                <!-- 步骤2：环保分拣（右下） -->
+                <g class="matrix-node cursor-pointer" data-step="1" onclick="selectMatrixStep(1)" transform="translate(366, 298)">
+                  <rect width="212" height="100" rx="20" fill="#FFFDF8" stroke="#89B0AE" stroke-width="2.5" class="matrix-box"/>
+                  <!-- 分拣传送带图标 -->
+                  <g transform="translate(16, 22)">
+                    <rect x="4" y="32" width="44" height="14" rx="7" fill="#A8DADC" stroke="#4A392C" stroke-width="1.8"/>
+                    <circle cx="14" cy="39" r="3" fill="#4A392C"/>
+                    <circle cx="38" cy="39" r="3" fill="#4A392C"/>
+                    <rect x="14" y="14" width="24" height="16" rx="4" fill="#FDF3D7" stroke="#4A392C" stroke-width="1.8"/>
+                    <path d="M22 8 Q26 2 30 8" stroke="#89B0AE" stroke-width="2" fill="none"/>
+                  </g>
+                  <text x="74" y="34" font-size="12" font-weight="700" fill="#557D7B">STEP 02</text>
+                  <text x="74" y="56" font-size="16" font-weight="700" fill="#4A392C" font-family="'Noto Serif SC', serif">环保分拣</text>
+                  <text x="74" y="76" font-size="11" fill="#6D523E">分类消毒·捐赠与再生棉</text>
+                </g>
+
+                <!-- 步骤3：价值转化（左下） -->
+                <g class="matrix-node cursor-pointer" data-step="2" onclick="selectMatrixStep(2)" transform="translate(26, 298)">
+                  <rect width="212" height="100" rx="20" fill="#FFFDF8" stroke="#E5A93C" stroke-width="2.5" class="matrix-box"/>
+                  <!-- 生长出金币与嫩叶的养分图标 -->
+                  <g transform="translate(16, 18)">
+                    <path d="M26 56 V28" stroke="#5F8D4E" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M26 42 Q10 38 12 26 Q24 28 26 42 Z" fill="#7EA172" stroke="#3D6133" stroke-width="1.3"/>
+                    <path d="M26 36 Q42 32 40 20 Q28 22 26 36 Z" fill="#B5CFA8" stroke="#3D6133" stroke-width="1.3"/>
+                    <circle cx="26" cy="14" r="9" fill="#F4D06F" stroke="#C4841D" stroke-width="1.8"/>
+                    <text x="26" y="18" text-anchor="middle" font-size="10" font-weight="700" fill="#6D523E">¥</text>
+                  </g>
+                  <text x="74" y="34" font-size="12" font-weight="700" fill="#C4841D">STEP 03</text>
+                  <text x="74" y="56" font-size="16" font-weight="700" fill="#4A392C" font-family="'Noto Serif SC', serif">价值转化</text>
+                  <text x="74" y="76" font-size="11" fill="#6D523E">公益资源滋养社区养分</text>
+                </g>
+
+                <!-- 步骤4：反哺社区（左上） -->
+                <g class="matrix-node cursor-pointer" data-step="3" onclick="selectMatrixStep(3)" transform="translate(26, 24)">
+                  <rect width="212" height="100" rx="20" fill="#FFFDF8" stroke="#E07A5F" stroke-width="2.5" class="matrix-box"/>
+                  <!-- 长者暖汤碗 + 环保书本嫩芽 -->
+                  <g transform="translate(14, 22)">
+                    <path d="M6 34 H36 C35 45 29 50 21 50 C13 50 7 45 6 34 Z" fill="#E07A5F" stroke="#4A392C" stroke-width="1.8"/>
+                    <path d="M15 27 Q14 20 17 16 M22 26 Q21 19 24 15 M29 27 Q28 20 31 16" stroke="#E5A93C" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    <circle cx="44" cy="40" r="10" fill="#B5CFA8" stroke="#3D6133" stroke-width="1.5"/>
+                    <path d="M44 46 V34" stroke="#3D6133" stroke-width="1.6"/>
+                  </g>
+                  <text x="74" y="34" font-size="12" font-weight="700" fill="#E07A5F">STEP 04</text>
+                  <text x="74" y="56" font-size="16" font-weight="700" fill="#4A392C" font-family="'Noto Serif SC', serif">反哺社区</text>
+                  <text x="74" y="76" font-size="11" fill="#6D523E">长者饭堂·环保研习社</text>
+                </g>
+              </svg>
+            </div>
+
+            <!-- 右侧：当前步骤详解与四步切换按钮 -->
+            <div class="lg:col-span-5 flex flex-col justify-between gap-5">
+              <div id="matrix-step-detail" class="handdrawn-tag p-6">
+                <!-- JS 动态填充 -->
+              </div>
+
+              <!-- 四个步骤快速导航按钮 -->
+              <div class="grid grid-cols-2 gap-2.5">
+                <button onclick="selectMatrixStep(0)" class="matrix-btn px-3.5 py-2.5 rounded-2xl text-left text-xs sm:text-sm font-medium border transition-all" data-step="0">
+                  01 · 闲置流入
+                </button>
+                <button onclick="selectMatrixStep(1)" class="matrix-btn px-3.5 py-2.5 rounded-2xl text-left text-xs sm:text-sm font-medium border transition-all" data-step="1">
+                  02 · 环保分拣
+                </button>
+                <button onclick="selectMatrixStep(2)" class="matrix-btn px-3.5 py-2.5 rounded-2xl text-left text-xs sm:text-sm font-medium border transition-all" data-step="2">
+                  03 · 价值转化
+                </button>
+                <button onclick="selectMatrixStep(3)" class="matrix-btn px-3.5 py-2.5 rounded-2xl text-left text-xs sm:text-sm font-medium border transition-all" data-step="3">
+                  04 · 反哺社区
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 趣味互动：旧衣温暖转换计算器 -->
+        <div class="storybook-card p-6 sm:p-8 bg-gradient-to-r from-sun-pale/45 via-paper-cream to-moss-light/25 reveal">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-5">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-moss/15 text-moss-deep text-xs font-bold mb-3">
+                ✨ 互动体验 · 旧衣温暖转换计算器
+              </span>
+              <h3 class="font-storybook text-2xl sm:text-3xl text-earth-deep mb-2">算一算你的闲置衣物能带来多少温暖？</h3>
+              <p class="text-sm text-earth-light mb-5">拖动滑块或点击快捷件数，模拟您的捐赠在减碳与社区反哺中转化的生态能量。</p>
+
+              <!-- 滑块与快捷按钮 -->
+              <div class="bg-paper-cream/90 p-5 rounded-3xl border border-earth/15">
+                <div class="flex items-baseline justify-between mb-3">
+                  <span class="text-sm font-medium text-earth">预计捐赠闲置衣物</span>
+                  <div class="font-storybook text-3xl text-moss-deep">
+                    <span id="calc-clothes-count">10</span> <span class="text-base font-sans text-earth-light">件</span>
+                  </div>
+                </div>
+                <input id="clothes-slider" type="range" min="1" max="60" value="10" class="eco-slider w-full mb-4" aria-label="选择捐赠闲置衣物件数" />
+                <div class="flex flex-wrap gap-2">
+                  <button onclick="setClothesCount(5)" class="px-3 py-1 rounded-full text-xs font-medium bg-paper-kraft hover:bg-moss hover:text-white transition-colors">5 件</button>
+                  <button onclick="setClothesCount(10)" class="px-3 py-1 rounded-full text-xs font-medium bg-paper-kraft hover:bg-moss hover:text-white transition-colors">10 件</button>
+                  <button onclick="setClothesCount(20)" class="px-3 py-1 rounded-full text-xs font-medium bg-paper-kraft hover:bg-moss hover:text-white transition-colors">20 件</button>
+                  <button onclick="setClothesCount(40)" class="px-3 py-1 rounded-full text-xs font-medium bg-paper-kraft hover:bg-moss hover:text-white transition-colors">40 件</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 右侧：实时计算结果卡片 -->
+            <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div class="p-5 rounded-3xl bg-paper-cream border border-moss/25 text-center shadow-sm">
+                <div class="text-2xl mb-2">🌿</div>
+                <div class="text-xs text-earth-light mb-1">预计减少碳排放</div>
+                <div class="font-storybook text-3xl text-moss-deep">
+                  <span id="calc-co2">18.0</span> <span class="text-sm font-sans">kg</span>
+                </div>
+                <p class="text-[11px] text-earth-light mt-2">约回收 <span id="calc-weight" class="font-semibold text-earth">5.0</span> kg 纺织品，助力蓝天减碳</p>
+              </div>
+
+              <div class="p-5 rounded-3xl bg-paper-cream border border-sun/35 text-center shadow-sm">
+                <div class="text-2xl mb-2">🍲</div>
+                <div class="text-xs text-earth-light mb-1">转化“长者饭堂”温暖能量</div>
+                <div class="font-storybook text-3xl text-sun-deep">
+                  <span id="calc-meals">2</span> <span class="text-sm font-sans">份热汤/配菜助力</span>
+                </div>
+                <p class="text-[11px] text-earth-light mt-2">让旧衣余温化作长者碗里一缕热气</p>
+              </div>
+
+              <div class="p-5 rounded-3xl bg-paper-cream border border-aqua/40 text-center shadow-sm">
+                <div class="text-2xl mb-2">📖</div>
+                <div class="text-xs text-earth-light mb-1">守护水资源与研学支持</div>
+                <div class="font-storybook text-3xl text-aqua-deep">
+                  <span id="calc-water">15</span> <span class="text-sm font-sans">吨节水</span>
+                </div>
+                <p class="text-[11px] text-earth-light mt-2">支撑环保研习社 <span id="calc-kids" class="font-semibold text-earth">1</span> 次亲子手工材料</p>
+              </div>
+            </div>
+          </div>
+          <div class="mt-5 pt-4 border-t border-earth/10 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p class="text-xs text-earth-light">* 注：以上数据基于单件闲置衣物约 0.5kg 及纺织品循环减碳公益估算模型，旨在直观感受点滴环保价值。</p>
+            <button onclick="openActionModal('donate')" class="shrink-0 px-5 py-2 rounded-full bg-moss text-white text-xs sm:text-sm font-medium hover:bg-moss-deep transition-colors shadow-sm">
+              立即预约捐赠这批衣物 →
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 7. 爱的蒲公英：飞向全国的温暖足迹 -->
+    <!-- ========================================================= -->
+    <section id="footprint" class="py-16 sm:py-24 relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- 板块标题 -->
+        <div class="text-center max-w-3xl mx-auto mb-12 reveal">
+          <span class="inline-block px-4 py-1 rounded-full bg-blossom-light/35 text-blossom text-xs font-semibold tracking-widest uppercase mb-3">Chapter 05 · 爱的蒲公英</span>
+          <h2 class="font-storybook text-3xl sm:text-4xl text-earth-deep mb-3">
+            爱的蒲公英：<span class="watercolor-underline">飞向全国</span>的温暖足迹
+          </h2>
+          <p class="text-earth-light text-sm sm:text-base">
+            从广东中山起飞，每一件承载善意的旧衣都像蒲公英的种子，乘风跨越山河，将温暖送达全国 18 个省、市、自治区。
+          </p>
+        </div>
+
+        <!-- 核心三大数据横幅 -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10 reveal">
+          <div class="storybook-card p-6 bg-gradient-to-br from-moss-light/25 to-paper-cream flex items-center gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-moss text-white flex items-center justify-center font-storybook text-2xl shrink-0 shadow-sm">衣</div>
+            <div>
+              <div class="text-xs text-earth-light">累计回收近</div>
+              <div class="font-storybook text-3xl sm:text-4xl text-moss-deep">4268 <span class="text-lg">吨</span></div>
+            </div>
+          </div>
+          <div class="storybook-card p-6 bg-gradient-to-br from-blossom-light/30 to-paper-cream flex items-center gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-blossom text-white flex items-center justify-center font-storybook text-2xl shrink-0 shadow-sm">爱</div>
+            <div>
+              <div class="text-xs text-earth-light">爱心惠及</div>
+              <div class="font-storybook text-3xl sm:text-4xl text-blossom">20 <span class="text-lg">万人次</span></div>
+            </div>
+          </div>
+          <div class="storybook-card p-6 bg-gradient-to-br from-sun-pale to-paper-cream flex items-center gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-sun text-white flex items-center justify-center font-storybook text-2xl shrink-0 shadow-sm">行</div>
+            <div>
+              <div class="text-xs text-earth-light">温暖覆盖全国</div>
+              <div class="font-storybook text-3xl sm:text-4xl text-sun-deep">18 <span class="text-lg">个省、市、自治区</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 互动蒲公英足迹地图 + 18省市标签墙 -->
+        <div class="storybook-card p-5 sm:p-8 bg-gradient-to-br from-[#FFFDF8] via-[#FAF6EE] to-[#EEF5F0] reveal">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <!-- 左侧：风格化中国水彩足迹星图 + 吹爱心吉祥物与绽放蒲公英 -->
+            <div class="lg:col-span-7 relative">
+              <svg id="china-footprint-svg" viewBox="0 0 640 460" class="w-full h-auto rounded-2xl bg-gradient-to-br from-aqua-pale/35 via-paper-cream to-sun-pale/35 border border-earth/10" role="img" aria-label="邻舍全国18省市爱的蒲公英温暖足迹地图">
+                <defs>
+                  <radialGradient id="dandelionGlow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#F4D06F" stop-opacity="0.7"/>
+                    <stop offset="100%" stop-color="#F4D06F" stop-opacity="0"/>
+                  </radialGradient>
+                </defs>
+
+                <!-- 风格化水彩中国版图柔和轮廓 -->
+                <path d="M126 178 C100 156 82 146 72 162 C62 182 88 214 96 238 C108 272 144 306 190 314 C228 320 250 338 282 356 C318 376 352 384 398 378 C430 374 456 354 476 326 C496 296 516 266 514 232 C512 206 498 188 518 164 C540 138 564 112 550 86 C534 60 492 78 468 96 C446 112 434 142 406 144 C370 148 342 128 302 132 C264 136 244 166 206 156 C172 148 152 132 126 178 Z"
+                      fill="#DCEAD1" stroke="#7EA172" stroke-width="2.2" stroke-linejoin="round" opacity="0.72"/>
+                <!-- 内部水彩晕染层次 -->
+                <circle cx="240" cy="245" r="95" fill="#F4D06F" opacity="0.16"/>
+                <circle cx="430" cy="285" r="85" fill="#A8DADC" opacity="0.2"/>
+
+                <!-- 右下角装饰：吹出爱心的迷你衣物银行吉祥物 & 绽放蒲公英花球 -->
+                <g transform="translate(525, 315) scale(0.52)">
+                  <!-- 蒲公英茎与绒球 -->
+                  <path d="M110 220 Q92 145 112 75" stroke="#5F8D4E" stroke-width="6" fill="none" stroke-linecap="round"/>
+                  <circle cx="112" cy="65" r="46" fill="url(#dandelionGlow)"/>
+                  <circle cx="112" cy="65" r="24" fill="#FFFDF8" stroke="#E5A93C" stroke-width="3" stroke-dasharray="4 4"/>
+                  <!-- 迷你箱子小人 -->
+                  <rect x="18" y="88" width="66" height="82" rx="10" fill="#FFFDF8" stroke="#4A392C" stroke-width="4"/>
+                  <path d="M12 90 L51 74 L90 90 Z" fill="#FAF6EE" stroke="#4A392C" stroke-width="4"/>
+                  <circle cx="40" cy="116" r="6" fill="#3B2B22"/>
+                  <circle cx="62" cy="116" r="6" fill="#3B2B22"/>
+                  <circle cx="51" cy="130" r="4" fill="#E07A5F"/>
+                  <!-- 吹出的小爱心 -->
+                  <path d="M10 104 C6 98 -2 100 0 106 C2 112 10 116 10 116 C10 116 18 112 20 106 C22 100 14 98 10 104 Z" fill="#E07A5F"/>
+                </g>
+
+                <!-- 动态轨迹线图层（JS填充18条飞向全国的蒲公英轨迹） -->
+                <g id="footprint-arcs"></g>
+
+                <!-- 18个省市发光星点图层（JS填充） -->
+                <g id="footprint-pins"></g>
+
+                <!-- 出发地：广东中山高亮灯塔 -->
+                <g transform="translate(418, 366)">
+                  <circle r="15" fill="#E07A5F" opacity="0.22" class="dandelion-pulse"/>
+                  <circle r="7" fill="#E07A5F" stroke="#FFFDF8" stroke-width="2.2"/>
+                  <text x="12" y="16" font-size="11.5" font-weight="700" fill="#B54D33">中山 · 温暖起点</text>
+                </g>
+              </svg>
+            </div>
+
+            <!-- 右侧：当前地区明信片 + 全部18个省市自治区交互标签墙 -->
+            <div class="lg:col-span-5 flex flex-col justify-between gap-5">
+              <!-- 动态地区明信片 -->
+              <div id="province-postcard" class="handdrawn-tag p-5 sm:p-6">
+                <!-- JS动态渲染 -->
+              </div>
+
+              <!-- 18个省市自治区交互标签 -->
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="text-xs font-semibold text-earth">点击或悬停地区，点亮爱的蒲公英轨迹：</span>
+                  <span class="text-xs text-moss-deep font-medium">共 18 省/市/区</span>
+                </div>
+                <div id="province-tags" class="flex flex-wrap gap-2">
+                  <!-- JS 动态渲染 18 个地区按钮 -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 8. 闪耀的勋章：十载耕耘的社会回音 -->
+    <!-- ========================================================= -->
+    <section id="honors" class="py-16 sm:py-24 relative bg-gradient-to-b from-transparent via-sun-pale/30 to-transparent">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12 reveal">
+          <span class="inline-block px-4 py-1 rounded-full bg-sun-pale text-sun-deep text-xs font-semibold tracking-widest uppercase mb-3">Chapter 06 · 闪耀的勋章</span>
+          <h2 class="font-storybook text-3xl sm:text-4xl text-earth-deep mb-3">
+            闪耀的勋章：<span class="watercolor-underline">十载耕耘</span>的社会回音
+          </h2>
+          <p class="text-earth-light text-sm sm:text-base">
+            每一份荣誉背后，都是万千中山市民、志愿者与合作伙伴共同种下的信任与光亮。
+          </p>
+        </div>
+
+        <!-- 五大荣誉手绘勋章网格 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
+          <!-- 荣誉1 -->
+          <div class="storybook-card p-6 bg-gradient-to-br from-sun-pale/55 via-paper-cream to-paper-cream relative overflow-hidden">
+            <div class="flex items-start gap-4">
+              <div class="shrink-0 w-16 h-16 flex items-center justify-center">
+                <svg viewBox="0 0 64 64" class="w-16 h-16">
+                  <path d="M22 40 L18 60 L28 54 L32 62 L36 54 L46 60 L42 40" fill="#E07A5F" opacity="0.85"/>
+                  <circle cx="32" cy="26" r="19" fill="#F4D06F" stroke="#C4841D" stroke-width="2.2"/>
+                  <circle cx="32" cy="26" r="14" fill="#FFFDF8" stroke="#E5A93C" stroke-width="1.5" stroke-dasharray="3 2"/>
+                  <path d="M32 16 L34.8 22.2 L41.5 23 L36.5 27.6 L37.8 34.2 L32 30.8 L26.2 34.2 L27.5 27.6 L22.5 23 L29.2 22.2 Z" fill="#E5A93C"/>
+                </svg>
+              </div>
+              <div>
+                <span class="inline-block px-2.5 py-0.5 rounded-full bg-sun-pale text-sun-deep text-[11px] font-bold mb-2">国家级公益认可</span>
+                <h3 class="font-serif text-lg font-bold text-earth-deep leading-snug mb-2">“衣·物银行”获全国百强环保公益项目</h3>
+                <p class="text-xs sm:text-sm text-earth-light leading-relaxed">凭借创新透明的闭环运营与广泛的市民参与度，脱颖而出入选全国百强环保公益项目。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 荣誉2 -->
+          <div class="storybook-card p-6 bg-gradient-to-br from-moss-light/30 via-paper-cream to-paper-cream relative overflow-hidden">
+            <div class="flex items-start gap-4">
+              <div class="shrink-0 w-16 h-16 flex items-center justify-center">
+                <svg viewBox="0 0 64 64" class="w-16 h-16">
+                  <path d="M22 40 L18 60 L28 54 L32 62 L36 54 L46 60 L42 40" fill="#5F8D4E" opacity="0.85"/>
+                  <circle cx="32" cy="26" r="19" fill="#B5CFA8" stroke="#3D6133" stroke-width="2.2"/>
+                  <circle cx="32" cy="26" r="14" fill="#FFFDF8" stroke="#5F8D4E" stroke-width="1.5" stroke-dasharray="3 2"/>
+                  <path d="M24 30 L30 20 L35 27 L38 23 L42 30 Z" fill="#5F8D4E"/>
+                </svg>
+              </div>
+              <div>
+                <span class="inline-block px-2.5 py-0.5 rounded-full bg-moss-light/35 text-moss-deep text-[11px] font-bold mb-2">2023 · 广东省唯二 / 中山市唯一</span>
+                <h3 class="font-serif text-lg font-bold text-earth-deep leading-snug mb-2">入围青山公益生态环境志愿服务项目首批合作伙伴</h3>
+                <p class="text-xs sm:text-sm text-earth-light leading-relaxed">以扎实的全域生态环保实践与专业志愿服务体系，获得国家级公益平台首批合作认可。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 荣誉3 -->
+          <div class="storybook-card p-6 bg-gradient-to-br from-blossom-light/30 via-paper-cream to-paper-cream relative overflow-hidden">
+            <div class="flex items-start gap-4">
+              <div class="shrink-0 w-16 h-16 flex items-center justify-center">
+                <svg viewBox="0 0 64 64" class="w-16 h-16">
+                  <path d="M22 40 L18 60 L28 54 L32 62 L36 54 L46 60 L42 40" fill="#E5A93C" opacity="0.85"/>
+                  <circle cx="32" cy="26" r="19" fill="#F5C4B6" stroke="#E07A5F" stroke-width="2.2"/>
+                  <circle cx="32" cy="26" r="14" fill="#FFFDF8" stroke="#E07A5F" stroke-width="1.5" stroke-dasharray="3 2"/>
+                  <text x="32" y="30" text-anchor="middle" font-size="11" font-weight="800" fill="#E07A5F">100</text>
+                </svg>
+              </div>
+              <div>
+                <span class="inline-block px-2.5 py-0.5 rounded-full bg-blossom-light/40 text-blossom text-[11px] font-bold mb-2">2022 · 中山公益标杆</span>
+                <h3 class="font-serif text-lg font-bold text-earth-deep leading-snug mb-2">荣获中山市“博爱100”品牌项目</h3>
+                <p class="text-xs sm:text-sm text-earth-light leading-relaxed">累计回收量突破 3400 吨，以深厚的本土公信力与温暖社区影响力荣膺“博爱100”品牌项目。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 荣誉4 -->
+          <div class="storybook-card p-6 bg-gradient-to-br from-aqua-pale/55 via-paper-cream to-paper-cream md:col-span-1 lg:col-span-1">
+            <div class="flex items-start gap-4">
+              <div class="shrink-0 w-16 h-16 flex items-center justify-center">
+                <svg viewBox="0 0 64 64" class="w-16 h-16">
+                  <circle cx="32" cy="30" r="20" fill="#A8DADC" stroke="#557D7B" stroke-width="2.2"/>
+                  <circle cx="32" cy="30" r="14" fill="#FFFDF8" stroke="#89B0AE" stroke-width="1.5"/>
+                  <path d="M22 33 Q27 25 32 31 T42 27" stroke="#557D7B" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div>
+                <span class="inline-block px-2.5 py-0.5 rounded-full bg-aqua-pale text-aqua-deep text-[11px] font-bold mb-2">2017 · 湾区协作</span>
+                <h3 class="font-serif text-lg font-bold text-earth-deep leading-snug mb-2">“粤港澳大湾区”环保公益联盟成员单位</h3>
+                <p class="text-xs sm:text-sm text-earth-light leading-relaxed">携手大湾区环保公益伙伴，交流前沿环保治理与市民参与经验，共建绿色宜居湾区。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 荣誉5 -->
+          <div class="storybook-card p-6 bg-gradient-to-br from-aqua-pale/45 via-paper-cream to-moss-light/20 md:col-span-1 lg:col-span-2">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 h-full">
+              <div class="shrink-0 w-16 h-16 flex items-center justify-center">
+                <svg viewBox="0 0 64 64" class="w-16 h-16">
+                  <circle cx="32" cy="30" r="20" fill="#89B0AE" stroke="#557D7B" stroke-width="2.2"/>
+                  <circle cx="32" cy="30" r="14" fill="#FFFDF8" stroke="#5F8D4E" stroke-width="1.5"/>
+                  <path d="M32 19 C32 19 24 28 24 33 A8 8 0 0 0 40 33 C40 28 32 19 32 19 Z" fill="#89B0AE"/>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <span class="inline-block px-2.5 py-0.5 rounded-full bg-aqua-pale text-aqua-deep text-[11px] font-bold mb-2">2017 · 水域守护</span>
+                <h3 class="font-serif text-lg font-bold text-earth-deep leading-snug mb-2">珠江水联合行动成员单位</h3>
+                <p class="text-xs sm:text-sm text-earth-light leading-relaxed">长期投身水域环保与净滩行动，联动“守护海岸”等本土志愿项目，凝聚公民力量守护珠江水与碧海蓝天。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 9. 翻开下一页：携手共绘下一个十年的温情画卷 & 互动寄语墙 -->
+    <!-- ========================================================= -->
+    <section id="next-decade" class="py-16 sm:py-24 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- 未来寄语主画卷卡片 -->
+        <div class="storybook-card p-7 sm:p-12 bg-gradient-to-br from-sun-pale/55 via-paper-cream to-moss-light/25 mb-12 relative overflow-hidden reveal">
+          <!-- 装饰手绘树枝与暖阳 -->
+          <div class="absolute -right-10 -top-10 w-52 h-52 rounded-full bg-sun-light/25 blur-2xl pointer-events-none"></div>
+
+          <div class="max-w-3xl mx-auto text-center relative z-10">
+            <span class="inline-block px-4 py-1 rounded-full bg-paper-cream border border-sun/45 text-sun-deep text-xs font-semibold tracking-widest mb-4">EPILOGUE · 翻开下一页</span>
+            <h2 class="font-storybook text-3xl sm:text-4xl text-earth-deep mb-6">
+              携手共绘<span class="watercolor-underline">下一个十年</span>的温情画卷
+            </h2>
+
+            <blockquote class="font-serif text-base sm:text-xl text-earth leading-loose mb-6">
+              “2025 年起，我们将继续深耕<strong>‘衣物银行’</strong>与<strong>‘长者饭堂’</strong>双项目，让每一件旧衣物都化作长者碗里的一缕热气，让每一次环保行动都成为邻里互助的桥梁。”
+            </blockquote>
+
+            <p class="text-sm sm:text-base text-earth-light mb-8">
+              感谢您见证邻舍的第一个十年。下一个十年，期待与您继续<strong class="text-moss-deep">“专注环保 · 乐在分享”</strong>！
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4">
+              <button onclick="openActionModal('donate')" class="px-7 py-3 rounded-full bg-moss text-white font-medium shadow-md hover:bg-moss-deep transition-all">
+                🎁 预约旧衣捐赠
+              </button>
+              <button onclick="openActionModal('volunteer')" class="px-7 py-3 rounded-full bg-paper-cream text-earth-deep font-medium border-2 border-sun hover:bg-sun-pale transition-all">
+                🤝 报名成为邻舍志愿者
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 互动：十周年暖心寄语墙（手绘树叶/便利贴留言板） -->
+        <div class="reveal">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+            <div>
+              <h3 class="font-storybook text-2xl sm:text-3xl text-earth-deep">🍃 十周年暖心寄语墙</h3>
+              <p class="text-sm text-earth-light mt-1">留下一张手绘树叶便签，写下您对邻舍下一个十年的温暖祝福。</p>
+            </div>
+            <span id="blessing-count" class="text-xs font-medium px-3.5 py-1.5 rounded-full bg-moss-light/30 text-moss-deep self-start md:self-auto">
+              已收集 6 份暖心祝福
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-7 items-start">
+            <!-- 左侧：写下祝福表单 -->
+            <form id="blessing-form" class="lg:col-span-4 storybook-card p-6 bg-paper-cream/95 space-y-4">
+              <div>
+                <label for="blessing-name" class="block text-xs font-semibold text-earth mb-1.5">您的称呼 / 社区邻居昵称</label>
+                <input id="blessing-name" type="text" maxlength="20" placeholder="例如：东区陈阿姨、小树苗妈妈" class="w-full px-4 py-2.5 rounded-2xl bg-paper border border-earth/20 text-sm text-earth-deep focus:outline-none focus:border-moss" required />
+              </div>
+
+              <div>
+                <label for="blessing-text" class="block text-xs font-semibold text-earth mb-1.5">写给邻舍下一个十年的话</label>
+                <textarea id="blessing-text" rows="3" maxlength="120" placeholder="祝邻舍十周年生日快乐！愿每一份旧衣都能带来温暖……" class="w-full px-4 py-2.5 rounded-2xl bg-paper border border-earth/20 text-sm text-earth-deep focus:outline-none focus:border-moss resize-none" required></textarea>
+              </div>
+
+              <div>
+                <span class="block text-xs font-semibold text-earth mb-2">选择一张手绘便签纸色</span>
+                <div class="flex items-center gap-3">
+                  <label class="cursor-pointer">
+                    <input type="radio" name="noteColor" value="sun" checked class="sr-only peer" />
+                    <span class="block w-8 h-8 rounded-full bg-sun-pale border-2 border-sun peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:ring-sun-deep"></span>
+                  </label>
+                  <label class="cursor-pointer">
+                    <input type="radio" name="noteColor" value="moss" class="sr-only peer" />
+                    <span class="block w-8 h-8 rounded-full bg-moss-light/45 border-2 border-moss peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:ring-moss-deep"></span>
+                  </label>
+                  <label class="cursor-pointer">
+                    <input type="radio" name="noteColor" value="aqua" class="sr-only peer" />
+                    <span class="block w-8 h-8 rounded-full bg-aqua-pale border-2 border-aqua peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:ring-aqua-deep"></span>
+                  </label>
+                  <label class="cursor-pointer">
+                    <input type="radio" name="noteColor" value="blossom" class="sr-only peer" />
+                    <span class="block w-8 h-8 rounded-full bg-blossom-light/45 border-2 border-blossom peer-checked:ring-2 peer-checked:ring-offset-2 peer-checked:ring-blossom"></span>
+                  </label>
+                </div>
+              </div>
+
+              <button type="submit" class="w-full py-3 rounded-full bg-gradient-to-r from-moss to-moss-soft text-white text-sm font-medium shadow-sm hover:from-moss-deep hover:to-moss transition-all active:scale-95">
+                贴上我的十周年祝福 ✨
+              </button>
+            </form>
+
+            <!-- 右侧：手绘树叶便签展示墙 -->
+            <div id="blessing-wall" class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- JS 动态渲染祝福便签 -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================= -->
+  <!-- 页脚 Footer -->
+  <!-- ========================================================= -->
+  <footer class="bg-earth-deep text-paper-cream/90 pt-14 pb-10 relative overflow-hidden">
+    <!-- 顶部柔和波浪过渡 -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-paper-cream/15">
+        <div class="md:col-span-5">
+          <div class="flex items-center gap-3 mb-4">
+            <div style="background: #fff;" class="w-10 h-10 rounded-2xl bg-moss/30 border border-moss-light/40 flex items-center justify-center">
+              <span class="font-storybook text-xl text-sun-light">
+                <img src="logo.png">
+              </span>
+            </div>
+            <div>
+              <h4 class="font-storybook text-2xl text-paper-cream">中山市邻舍社会工作服务中心</h4>
+              <p class="text-xs text-paper-cream/65">We care, We share! · 专注环保 · 乐在分享</p>
+            </div>
+          </div>
+          <p class="text-sm text-paper-cream/75 leading-relaxed max-w-md">
+            成立于2016年，扎根广东中山、辐射全国18省市。持续深耕“衣物银行”与“长者饭堂”双项目，携手每一位市民共建互帮互助、绿色温暖的美好邻里家园。
+          </p>
+        </div>
+
+        <div class="md:col-span-3">
+          <h5 class="font-serif font-bold text-sun-light mb-4 text-sm tracking-wider">导航</h5>
+          <ul class="space-y-2 text-sm text-paper-cream/75">
+            <li><a href="#about" class="hover:text-sun-light transition-colors">播下种子 · 关于邻舍与种树人</a></li>
+            <li><a href="#timeline" class="hover:text-sun-light transition-colors">岁月年轮 · 2012-2025成长路</a></li>
+            <li><a href="#town" class="hover:text-sun-light transition-colors">邻里小镇 · 七大核心项目</a></li>
+            <li><a href="#matrix" class="hover:text-sun-light transition-colors">生态矩阵 · 温暖循环引擎</a></li>
+            <li><a href="#footprint" class="hover:text-sun-light transition-colors">爱的蒲公英 · 全国18省市足迹</a></li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-4">
+          <h5 class="font-serif font-bold text-sun-light mb-4 text-sm tracking-wider">携手参与公益</h5>
+          <p class="text-sm text-paper-cream/75 mb-4">
+<!--            地址：广东省中山市（邻舍公益服务点与中山垃圾分类时尚馆）<br/>-->
+<!--            合作理念：民办非企业单位 · 透明公开 · 全民环保-->
+          </p>
+          <div class="flex flex-wrap gap-2.5">
+            <button onclick="openActionModal('donate')" class="px-4 py-2 rounded-full bg-moss hover:bg-moss-soft text-white text-xs font-medium transition-colors">
+              预约捐衣
+            </button>
+            <button onclick="openActionModal('volunteer')" class="px-4 py-2 rounded-full bg-sun/20 hover:bg-sun/35 text-sun-light border border-sun/40 text-xs font-medium transition-colors">
+              成为志愿者
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-paper-cream/55">
+        <p>© 2016–2026 中山市邻舍社会工作服务中心 · 成立10周年纪念官网</p>
+        <p>专注环保，乐在分享</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================= -->
+  <!-- 互动弹窗：加入我们 / 参与公益（旧衣捐赠预约 & 志愿者报名 + 电子感谢卡） -->
+  <!-- ========================================================= -->
+  <div id="action-modal" class="fixed inset-0 z-[60] hidden items-center justify-center p-4 bg-earth-deep/55 backdrop-blur-sm">
+    <div class="storybook-card w-full max-w-lg max-h-[92vh] overflow-y-auto bg-paper-cream p-6 sm:p-8 relative">
+      <!-- 关闭按钮 -->
+      <button onclick="closeActionModal()" aria-label="关闭弹窗" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-paper-kraft/80 hover:bg-blossom-light/40 text-earth-deep flex items-center justify-center transition-colors">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+
+      <!-- 表单视图 -->
+      <div id="modal-form-view">
+        <div class="text-center mb-5">
+          <span class="inline-block px-3 py-1 rounded-full bg-moss-light/30 text-moss-deep text-xs font-bold mb-2">We care, We share!</span>
+          <h3 class="font-storybook text-2xl sm:text-3xl text-earth-deep">加入邻舍温暖同行</h3>
+        </div>
+
+        <!-- 切换 Tab -->
+        <div class="grid grid-cols-2 gap-2 p-1.5 rounded-full bg-paper-kraft/70 mb-6">
+          <button type="button" id="modal-tab-donate" onclick="switchModalTab('donate')" class="py-2 rounded-full text-sm font-medium transition-all">
+            👕 旧衣捐赠预约
+          </button>
+          <button type="button" id="modal-tab-volunteer" onclick="switchModalTab('volunteer')" class="py-2 rounded-full text-sm font-medium transition-all">
+            🌱 志愿者报名
+          </button>
+        </div>
+
+        <!-- 旧衣捐赠预约表单 -->
+        <form id="donate-form" class="space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-earth mb-1">联系人姓名</label>
+              <input name="name" type="text" required placeholder="请填写您的称呼" class="w-full px-4 py-2.5 rounded-2xl bg-paper border border-earth/20 text-sm focus:outline-none focus:border-moss" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-earth mb-1">联系电话</label>
+              <input name="phone" type="tel" required placeholder="用于公益收运沟通" class="w-full px-4 py-2.5 rounded-2xl bg-paper border border-earth/20 text-sm focus:outline-none focus:border-moss" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-earth mb-1">所在镇街（中山市）</label>
+              <select name="district" class="w-full px-4 py-2.5 rounded-2xl bg-paper border border-earth/20 text-sm focus:outline-none focus:border-moss">
+                <option value="石岐街道">石岐街道</option>
+                <option value="东区街道">东区街道</option>
+                <option value="西区街道">西区街道</option>
+                <option value="南区街道">南区街道</option>
+                <option value="火炬开发区">火炬开发区</option>
+                <option value="小榄镇">小榄镇</option>
+                <option value="三乡镇 / 坦洲镇">三乡镇 / 坦洲镇</option>
+                <option value="中山其他镇街 / 外地邮寄">中山其他镇街 / 外地邮寄</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-earth mb-1">预计闲置衣物量</label>
+              <select name="amount" class="w-full px-4 py-2.5 rounded-2xl bg-paper border border-earth/20 text-sm focus:outline-none focus:border-moss">
+                <option value="5-10件（约3-5kg）">5–10件（约 3–5kg）</option>
+                <option value="10-20件（约5-10kg）">10–20件（约 5–10kg）</option>
+                <option value="20件以上（家庭换季整理）">20件以上（家庭换季整理）</option>
+                <option value="社区/企业集体公益捐赠">社区 / 企业集体公益捐赠</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-earth mb-1">投放方式 / 备注</label>
+            <input name="note" type="text" placeholder="如：预约上门收取 / 查询附近衣物银行站点" class="w-full px-4 py-2.5 rounded-2xl bg-paper border border-earth/20 text-sm focus:outline-none focus:border-moss" />
+          </div>
+
+          <button type="submit" class="w-full py-3 rounded-full bg-gradient-to-r from-moss to-moss-soft text-white font-medium shadow-md hover:from-moss-deep hover:to-moss transition-all">
+            提交捐赠预约 · 领取电子感谢卡
+          </button>
+        </form>
+
+        <!-- 志愿者报名表单 -->
+        <form id="volunteer-form" class="space-y-4 hidden">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-earth mb-1">您的姓名</label>
+              <input name="name" type="text" required placeholder="请填写您的姓名" class="w-full px-4 py-2.5 rounded-2xl bg-paper border border-earth/20 text-sm focus:outline-none focus:border-moss" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-earth mb-1">联系电话 / 微信</label>
+              <input name="phone" type="tel" required placeholder="便于志愿者联络" class="w-full px-4 py-2.5 rounded-2xl bg-paper border border-earth/20 text-sm focus:outline-none focus:border-moss" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-earth mb-1">意向参与的邻里小镇项目</label>
+            <select name="project" id="volunteer-project-select" class="w-full px-4 py-2.5 rounded-2xl bg-paper border border-earth/20 text-sm focus:outline-none focus:border-moss">
+              <option value="衣物银行（分拣与宣传志愿）">衣物银行（分拣与宣传志愿）</option>
+              <option value="长者饭堂（送餐与社区关怀）">长者饭堂（送餐与社区关怀）</option>
+              <option value="环保研习社（自然教育助教）">环保研习社（自然教育助教）</option>
+              <option value="守护海岸（净滩与水域保护）">守护海岸（净滩与水域保护）</option>
+              <option value="爱心公益集市 / 壹起分 / 邻舍4S店">爱心公益集市 / 壹起分 / 邻舍4S店</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-earth mb-1">个人专长或想对邻舍说的话</label>
+            <textarea name="note" rows="2" placeholder="如：周末有空、擅长摄影/亲子手工/社区活动组织" class="w-full px-4 py-2.5 rounded-2xl bg-paper border border-earth/20 text-sm focus:outline-none focus:border-moss resize-none"></textarea>
+          </div>
+
+          <button type="submit" class="w-full py-3 rounded-full bg-gradient-to-r from-sun to-sun-deep text-white font-medium shadow-md hover:opacity-95 transition-all">
+            提交志愿者报名 · 领取电子同行卡
+          </button>
+        </form>
+      </div>
+
+      <!-- 提交成功：模拟手绘电子公益感谢卡视图 -->
+      <div id="modal-certificate-view" class="hidden text-center">
+        <div class="handdrawn-tag p-6 bg-gradient-to-br from-sun-pale/65 via-paper-cream to-moss-light/30 relative overflow-hidden">
+          <div class="text-xs tracking-widest text-moss-deep font-bold mb-1">LINSHE 10TH ANNIVERSARY</div>
+          <h4 class="font-storybook text-2xl sm:text-3xl text-earth-deep mb-3">电子公益感谢卡</h4>
+
+          <!-- 迷你吉祥物徽章 -->
+          <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-paper-cream border-2 border-sun flex items-center justify-center shadow-sm">
+            <span class="text-3xl">🌱</span>
+          </div>
+
+          <p class="text-sm text-earth leading-relaxed mb-3">
+            亲爱的 <strong id="cert-user-name" class="text-moss-deep text-base">热心邻居</strong>：
+          </p>
+          <p id="cert-message" class="text-xs sm:text-sm text-earth leading-relaxed mb-4">
+            感谢您参与中山市邻舍社会工作服务中心10周年公益行动！您的每一次举手之劳，都在为社区增添绿色与暖意。
+          </p>
+
+          <div class="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-2 rounded-2xl bg-paper-cream/90 border border-earth/15 text-xs text-earth-light mb-4">
+            <span>感谢卡编号：<strong id="cert-id" class="text-earth-deep">LS10-2026-0818</strong></span>
+            <span>·</span>
+            <span id="cert-date">2026年</span>
+          </div>
+
+          <div class="font-brush text-xl text-moss-deep">专注环保 · 乐在分享</div>
+        </div>
+
+        <div class="mt-5 flex flex-col sm:flex-row gap-3 justify-center">
+          <button type="button" onclick="copyCertificateText()" class="px-5 py-2.5 rounded-full bg-moss text-white text-sm font-medium hover:bg-moss-deep transition-colors">
+            📋 复制公益纪念文案
+          </button>
+          <button type="button" onclick="closeActionModal()" class="px-5 py-2.5 rounded-full bg-paper-kraft text-earth-deep text-sm font-medium hover:bg-sun-pale transition-colors">
+            返回继续浏览绘本
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- 核心交互与动画脚本 -->
+  <!-- ========================================================= -->
+  <script>
+    /* ===========================================================
+       一、核心绘本数据集（严格依据《邻舍10周年纪念绘本》）
+       =========================================================== */
+
+    // 1. 岁月年轮 2012–2025+ 数据
+    const TIMELINE_DATA = [
+      {
+        year: '2012',
+        phase: 'upper',
+        tag: '初心启程',
+        title: '“衣·物银行”1.0模式',
+        desc: '朴素起步，开启公益探索。全年回收 238 吨，将闲置衣物化作源源不断的温暖，迈出环保公益第一步。',
+        highlight: '全年回收 238 吨',
+        color: '#E5A93C'
+      },
+      {
+        year: '2016',
+        phase: 'upper',
+        tag: '正式成立',
+        title: '邻舍正式成立 · 升级2.0闭环模式',
+        desc: '中山市邻舍社会工作服务中心正式注册成立。全面升级2.0闭环模式：“回收—分拣—优质捐赠—残次循环回收”，让每一件旧衣各尽其用。',
+        highlight: '2.0 全流程闭环',
+        color: '#5F8D4E'
+      },
+      {
+        year: '2017',
+        phase: 'upper',
+        tag: '走出中山',
+        title: '服务首次走出中山，成立阳江分支机构',
+        desc: '在阳江成立分支机构，回收网络迅速扩张；同年成为“粤港澳大湾区”环保公益联盟与珠江水联合行动成员单位。',
+        highlight: '首跨地域扩张',
+        color: '#89B0AE'
+      },
+      {
+        year: '2018',
+        phase: 'upper',
+        tag: '覆盖全国',
+        title: '累计回收突破 1300 吨，覆盖全国 18 省',
+        desc: '服务回收网络持续扩张，爱的蒲公英吹遍大江南北，累计回收量突破 1300 吨，服务与受助范围覆盖全国 18 个省份。',
+        highlight: '突破 1300 吨 · 18 省',
+        color: '#E5A93C'
+      },
+      {
+        year: '2019',
+        phase: 'upper',
+        tag: '数智升级',
+        title: '“衣·物银行”3.0模式新阶段',
+        desc: '全面迈向专业化、规模化、数据化运营新阶段，建立更加规范、透明、可追溯的环保公益运作体系。',
+        highlight: '专业化·规模化·数据化',
+        color: '#7EA172'
+      },
+      {
+        year: '2020',
+        phase: 'lower',
+        tag: '教育标杆',
+        title: '携手垃圾分类办 · 中山垃圾分类时尚馆开馆',
+        desc: '服务回收携手中山垃圾分类办，深耕全域生态环保；中山垃圾分类时尚馆正式开馆，打造中山市垃圾分类教育示范标杆。',
+        highlight: '垃圾分类时尚馆开馆',
+        color: '#5F8D4E'
+      },
+      {
+        year: '2021',
+        phase: 'lower',
+        tag: '五载同行',
+        title: '邻舍成立 5 周年，扩大社区服务半径',
+        desc: '迎来机构成立五周年，持续深化社区志愿服务，将环保研学、公益集市与邻里互助带入更多中山社区。',
+        highlight: '成立 5 周年',
+        color: '#E07A5F'
+      },
+      {
+        year: '2022',
+        phase: 'lower',
+        tag: '品牌荣誉',
+        title: '突破 3400 吨 · 荣获中山市“博爱100”品牌项目',
+        desc: '累计回收量突破 3400 吨，“衣·物银行”凭借深厚的民生温度与环保成效，荣获中山市“博爱100”品牌项目。',
+        highlight: '3400 吨 · 博爱100',
+        color: '#E5A93C'
+      },
+      {
+        year: '2023',
+        phase: 'lower',
+        tag: '国家认可',
+        title: '近 4000 吨 · 惠及 19 万人 · 青山公益合作伙伴',
+        desc: '累计回收近 4000 吨，爱心惠及 19 万人；成为广东省唯二、中山市唯一入围青山公益生态环境志愿服务项目首批合作伙伴。',
+        highlight: '国家级环保伙伴认可',
+        color: '#5F8D4E'
+      },
+      {
+        year: '2024',
+        phase: 'lower',
+        tag: '社区深耕',
+        title: '持续深耕各项核心项目，完善社区关怀网络',
+        desc: '七大核心项目协同发力，进一步打通“环保循环+社区养老+亲子教育”的全域公益服务生态。',
+        highlight: '全域生态关怀矩阵',
+        color: '#89B0AE'
+      },
+      {
+        year: '2025+',
+        phase: 'lower',
+        tag: '奔赴新十年',
+        title: '深耕“衣物银行”与“长者饭堂”双项目',
+        desc: '累计回收近 4268 吨、惠及 20 万人次。迈向下一个十年，让每一件旧衣物都化作长者碗里的一缕热气，让邻里互助生生不息。',
+        highlight: '衣物银行 × 长者饭堂',
+        color: '#E07A5F'
+      }
+    ];
+
+    // 2. 邻里小镇：七大核心项目数据
+    const TOWN_PROJECTS = [
+      {
+        name: '衣物银行',
+        subtitle: '闲置衣物规范回收与循环再生核心引擎',
+        badge: '核心品牌项目',
+        icon: '👕',
+        colorClass: 'from-moss-light/35 to-paper-cream border-moss/35',
+        accent: '#5F8D4E',
+        desc: '自2012年朴素起步，历经1.0至3.0数智闭环升级。通过遍布社区的回收箱与预约通道，对闲置衣物进行专业分拣、清洗消毒、优质捐赠与残次循环再生，是滋养邻舍全生态的源头活水。',
+        features: ['累计回收近4268吨', '优质捐赠覆盖18省市', '残次品转化为再生棉等环保材料'],
+        volunteerVal: '衣物银行（分拣与宣传志愿）'
+      },
+      {
+        name: '邻舍4S店',
+        subtitle: '社区闲置好物修复、共享与便民环保服务站',
+        badge: '便民共享空间',
+        icon: '🛠️',
+        colorClass: 'from-sun-pale/75 to-paper-cream border-sun/40',
+        accent: '#C4841D',
+        desc: '以“延缓物品寿命、倡导物尽其用”为理念的社区便民驿站。为居民提供家电小修、闲置好物置换、工具共享等贴心服务，让旧物重焕新生，拉近左邻右舍的距离。',
+        features: ['闲置好物修复延寿', '社区共享便民服务', '倡导零废弃生活方式'],
+        volunteerVal: '爱心公益集市 / 壹起分 / 邻舍4S店'
+      },
+      {
+        name: '环保研习社',
+        subtitle: '自然教育、环保手工与垃圾分类时尚馆研学',
+        badge: '新生代环保培育',
+        icon: '🌱',
+        colorClass: 'from-moss-light/30 to-aqua-pale/40 border-moss-soft/40',
+        accent: '#3D6133',
+        desc: '依托中山垃圾分类时尚馆等教育阵地，面向亲子家庭与青少年开展丰富有趣的自然观察、旧物改造手作与垃圾分类研学课程，在孩子们心中种下绿色生态的种子。',
+        features: ['垃圾分类时尚馆标杆研学', '旧衣/废品创意环保手作', '亲子自然生态教育课堂'],
+        volunteerVal: '环保研习社（自然教育助教）'
+      },
+      {
+        name: '壹起分',
+        subtitle: '联动社区推广垃圾分类实践，让分类成为新时尚',
+        badge: '全民分类行动',
+        icon: '♻️',
+        colorClass: 'from-aqua-pale/60 to-paper-cream border-aqua/45',
+        accent: '#557D7B',
+        desc: '携手中山垃圾分类办与各大社区，通过趣味互动游戏、入户宣导与常态化志愿督导，把枯燥的分类知识变成人人愿参与、人人能上手的社区绿色新时尚。',
+        features: ['政社联动全域推进', '社区趣味分类互动打卡', '提升市民日常环保素养'],
+        volunteerVal: '爱心公益集市 / 壹起分 / 邻舍4S店'
+      },
+      {
+        name: '守护海岸',
+        subtitle: '净滩与水域保护行动，守护珠江水与碧海蓝天',
+        badge: '水域生态保护',
+        icon: '🌊',
+        colorClass: 'from-aqua-pale/75 to-paper-cream border-aqua-deep/35',
+        accent: '#557D7B',
+        desc: '作为珠江水联合行动成员单位，定期组织市民与亲子志愿者深入江畔与海岸线开展净滩清理、垃圾溯源记录与水生态科普，用双手守护家乡清澈水脉。',
+        features: ['常态化净滩巡河志愿', '水生态监测与科普', '珠江水联合行动践行者'],
+        volunteerVal: '守护海岸（净滩与水域保护）'
+      },
+      {
+        name: '爱心公益集市',
+        subtitle: '邻里闲置置换、义卖与互助交流的温暖市集',
+        badge: '烟火气邻里情',
+        icon: '🎪',
+        colorClass: 'from-blossom-light/40 to-paper-cream border-blossom/35',
+        accent: '#E07A5F',
+        desc: '把环保搬进热气腾腾的社区周末市集！居民带着闲置玩具、书籍、手工小物前来置换或公益义卖，让物品在邻里间快乐流转，所得善款继续反哺社区关怀项目。',
+        features: ['闲置好物以物易物', '义卖筹款反哺公益', '相亲相爱的邻里社交场'],
+        volunteerVal: '爱心公益集市 / 壹起分 / 邻舍4S店'
+      },
+      {
+        name: '长者饭堂',
+        subtitle: '公益循环资金反哺社区，为长者端上暖心热饭',
+        badge: '2025+重点深耕',
+        icon: '🍲',
+        colorClass: 'from-sun-pale/80 to-blossom-light/25 border-sun/45',
+        accent: '#E07A5F',
+        desc: '邻舍生态矩阵最温暖的落脚点。将“衣物银行”等项目循环转化产生的公益资金注入社区“长者饭堂”，为独居、高龄与有需要的社区长者提供热腾腾、营养均衡的暖心餐食与陪伴。',
+        features: ['衣物循环资金精准反哺', '社区长者暖心热饭餐食', '志愿送餐与情感陪伴'],
+        volunteerVal: '长者饭堂（送餐与社区关怀）'
+      }
+    ];
+
+    // 3. 生态矩阵四步循环数据
+    const MATRIX_STEPS = [
+      {
+        num: 'STEP 01',
+        title: '闲置流入：居民闲置衣物投放区',
+        tag: '起点 · 举手之劳',
+        color: '#5F8D4E',
+        desc: '中山市民将家中清洗整理好的闲置衣物，投入社区“衣物银行”回收箱，或通过线上预约交由邻舍公益团队收运。每一件被妥善投放的旧衣，都是绿色循环的起点。',
+        points: ['覆盖中山多镇街社区回收站点', '支持家庭预约与企事业单位团捐', '便捷透明，鼓励全民日常参与']
+      },
+      {
+        num: 'STEP 02',
+        title: '环保分拣：精细分类、清洗消毒与再生',
+        tag: '专业 · 2.0/3.0闭环',
+        color: '#557D7B',
+        desc: '回收衣物送至专业分拣中心，经过严格的人工精细分类、清洗与多重消毒。成色良好的优质衣物进入爱心捐赠通道；破损残次品则交由专业环保工厂转化为再生棉、工业保温材料等，实现零浪费。',
+        points: ['优质衣物：清洗消毒后精准捐赠', '残次衣物：专业再生棉循环利用', '数据化记录每一批次流向']
+      },
+      {
+        num: 'STEP 03',
+        title: '价值转化：成为滋养社区的“养分”',
+        tag: '造血 · 公益可持续',
+        color: '#C4841D',
+        desc: '闲置纺织品循环再生所产生的生态资源与规范公益资金，摆脱单一外部输血模式，转化为源源不断滋养本土社区服务的内生“养分”。',
+        points: ['让环保行为产生可持续公益资金', '资金透明回流本土社区服务', '形成自我造血的良性生态引擎']
+      },
+      {
+        num: 'STEP 04',
+        title: '反哺社区：长者饭堂与环保研习社',
+        tag: '归宿 · 全域温暖',
+        color: '#E07A5F',
+        desc: '循环转化的公益养分精准注入“长者饭堂”，化作社区老人碗里的一缕热气；同时持续支撑“环保研习社”与“垃圾分类时尚馆”，培育下一代环保力量，让善意在社区生生不息。',
+        points: ['注入“长者饭堂”提供温暖餐食', '支撑“环保研习社”与“垃圾分类时尚馆”', '构建互帮互助、相亲相爱的社区生态']
+      }
+    ];
+
+    // 4. 爱的蒲公英：全国18个省、市、自治区坐标与暖心明信片数据
+    const PROVINCES_18 = [
+      { name: '广东', x: 418, y: 366, region: '温暖起点 · 粤港澳大湾区', msg: '从中山起步并拓展至阳江与全省多地，万千市民的善意在此汇聚成河，向全国播撒蒲公英的种子。' },
+      { name: '广西', x: 356, y: 368, region: '华南邻邦 · 山水相连', msg: '一衣带水的温暖牵挂，满载干净冬衣与生活物资的爱心包裹跨越山岭，送达八桂乡村社区。' },
+      { name: '湖南', x: 382, y: 314, region: '潇湘暖意 · 城乡互助', msg: '在湘西与偏远乡镇，来自中山邻舍的洁净衣物陪伴许多乡村家庭度过湿冷的秋冬。' },
+      { name: '贵州', x: 326, y: 332, region: '黔山温情 · 守望相助', msg: '蒲公英飘进多彩贵州的大山村寨，为留守儿童与山区长者送去厚实暖心的衣物关怀。' },
+      { name: '云南', x: 266, y: 352, region: '彩云之南 · 跨越山海', msg: '翻越崇山峻岭，将珠江口的温润关爱传递至彩云之南的高寒山区学校与村落。' },
+      { name: '四川', x: 288, y: 282, region: '巴蜀大地 · 暖流常伴', msg: '在大凉山与川西高原，一批批经过严格消毒分拣的优质棉衣化作冬日最踏实的守护。' },
+      { name: '西藏', x: 162, y: 284, region: '雪域高原 · 温暖抵达', msg: '跨越数千公里海拔落差，中山市民的厚实御寒衣物如雪域暖阳，温暖高原牧民的心田。' },
+      { name: '青海', x: 222, y: 226, region: '三江之源 · 绿意同行', msg: '守护江河源头，也关怀高原乡亲，爱的蒲公英在辽阔青藏高原留下一串温暖足迹。' },
+      { name: '新疆', x: 126, y: 174, region: '天山南北 · 万里传情', msg: '风雪再远也挡不住善意抵达，来自岭南的闲置好物跨越戈壁天山，连接起各族邻里的深情。' },
+      { name: '甘肃', x: 274, y: 214, region: '陇原大地 · 丝路暖风', msg: '沿着古老丝路，一箱箱洁净衣物送到黄土高原与河西走廊的需要之处，传递质朴真情。' },
+      { name: '宁夏', x: 314, y: 202, region: '塞上江南 · 温情相依', msg: '微风拂过贺兰山下，邻舍的绿色循环将闲置资源化为实实在在的温暖帮扶。' },
+      { name: '陕西', x: 342, y: 244, region: '三秦沃土 · 守望关怀', msg: '秦岭南北，一件件经过精心分拣的衣服带着“专注环保·乐在分享”的初心温暖前行。' },
+      { name: '山西', x: 374, y: 204, region: '表里山河 · 暖冬行动', msg: '凛冽寒风中，来自广东的厚衣与爱心物资为三晋乡村带去一份踏实而温柔的暖意。' },
+      { name: '内蒙古', x: 372, y: 150, region: '辽阔草原 · 蒲公英落脚', msg: '绵延千里的北疆草原上，蒲公英的绒毛轻轻落下，将南方小城的善意送进温暖蒙古包。' },
+      { name: '河南', x: 398, y: 248, region: '中原大地 · 邻里同心', msg: '中原腹地守望相助，在救灾支援与日常帮扶中，邻舍物资多次及时奔赴一线。' },
+      { name: '江苏', x: 468, y: 256, region: '江南水乡 · 公益共振', msg: '跨越江海的环保联动，与华东公益伙伴共同拓展闲置循环利用的温暖边界。' },
+      { name: '天津', x: 444, y: 180, region: '渤海之滨 · 善意互通', msg: '从南海之滨到渤海之畔，邻舍的温暖网络让环保分享的精神在更多城市生根发芽。' },
+      { name: '辽宁', x: 492, y: 146, region: '白山黑水 · 关东暖阳', msg: '一路向北抵达东北大地，冬日御寒衣物为远方的朋友送去来自中山的热忱祝福。' }
+    ];
+
+    // 5. 初始十周年暖心寄语墙数据
+    const DEFAULT_BLESSINGS = [
+      {
+        name: '石岐陈阿姨',
+        text: '家里换季的旧衣服一直投在小区门口的衣物银行，听说还能帮到长者饭堂，心里特别踏实暖和！祝邻舍10周年生日快乐！',
+        color: 'sun',
+        date: '2026·纪念留言',
+        likes: 28
+      },
+      {
+        name: '小树苗妈妈',
+        text: '带孩子去过中山垃圾分类时尚馆和环保研习社，孩子回家后主动教全家做垃圾分类，太棒的环保启蒙啦！',
+        color: 'moss',
+        date: '2026·纪念留言',
+        likes: 35
+      },
+      {
+        name: '志愿者阿俊',
+        text: '从2018年第一次参加守护海岸净滩，到今年陪邻舍走过十周年，很荣幸成为“专注环保·乐在分享”的一份子！',
+        color: 'aqua',
+        date: '2026·纪念留言',
+        likes: 21
+      },
+      {
+        name: '东区热心邻居',
+        text: '逛过两次邻舍爱心公益集市，既有烟火气又有满满的善意，期待下一个十年衣物银行和长者饭堂越办越好！',
+        color: 'blossom',
+        date: '2026·纪念留言',
+        likes: 19
+      }
+    ];
+
+    /* ===========================================================
+       二、全局状态管理
+       =========================================================== */
+    let currentTimelinePhase = 'upper';
+    let currentTimelineIndex = 0; // 对应 TIMELINE_DATA 全局索引
+    let currentTownIndex = 0;
+    let currentMatrixStep = 0;
+    let matrixAutoTimer = null;
+    let currentProvinceName = '广东';
+    let blessingsList = [];
+    let latestCertificateCopyText = '';
+
+    /* ===========================================================
+       三、温馨提示 Toast（严格替代 alert）
+       =========================================================== */
+    function showToast(message, type = 'success') {
+      try {
+        const container = document.getElementById('toast-container');
+        if (!container) return;
+        const toast = document.createElement('div');
+        const bgClass = type === 'success'
+          ? 'bg-moss-deep text-white border-moss-light/40'
+          : 'bg-sun-deep text-white border-sun-light/40';
+        toast.className = `pointer-events-auto px-4 py-3 rounded-2xl border shadow-lg text-sm flex items-center gap-2.5 transform translate-y-3 opacity-0 transition-all duration-300 ${bgClass}`;
+        toast.innerHTML = `<span class="text-base">${type === 'success' ? '🌱' : '✨'}</span><span>${escapeHtml(message)}</span>`;
+        container.appendChild(toast);
+
+        requestAnimationFrame(() => {
+          toast.classList.remove('translate-y-3', 'opacity-0');
+        });
+
+        setTimeout(() => {
+          toast.classList.add('translate-y-3', 'opacity-0');
+          setTimeout(() => toast.remove(), 320);
+        }, 3200);
+      } catch (err) {
+        console.error('Toast 渲染异常:', err);
+      }
+    }
+
+    // 简单安全的 HTML 转义工具
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    /* ===========================================================
+       四、首屏蒲公英种子飘落轻量 Canvas 动效（全响应式）
+       =========================================================== */
+    function initDandelionCanvas() {
+      try {
+        const canvas = document.getElementById('dandelion-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let width = 0;
+        let height = 0;
+        let seeds = [];
+
+        function resizeCanvas() {
+          const rect = canvas.parentElement.getBoundingClientRect();
+          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+          width = rect.width;
+          height = rect.height;
+          canvas.width = width * dpr;
+          canvas.height = height * dpr;
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+          const count = width < 640 ? 14 : 26;
+          seeds = Array.from({ length: count }, () => createSeed(true));
+        }
+
+        function createSeed(randomX = false) {
+          return {
+            x: randomX ? Math.random() * width : -20,
+            y: Math.random() * height,
+            size: 5 + Math.random() * 6,
+            vx: 0.25 + Math.random() * 0.45,
+            vy: -0.15 + Math.random() * 0.35,
+            angle: Math.random() * Math.PI * 2,
+            swaySpeed: 0.008 + Math.random() * 0.012,
+            swayPhase: Math.random() * Math.PI * 2,
+            opacity: 0.28 + Math.random() * 0.38
+          };
+        }
+
+        function drawSeed(s) {
+          ctx.save();
+          ctx.translate(s.x, s.y);
+          ctx.rotate(Math.sin(s.swayPhase) * 0.45 + 0.3);
+          ctx.globalAlpha = s.opacity;
+
+          // 细小花柄与种子
+          ctx.strokeStyle = '#9A7B63';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.lineTo(0, s.size * 1.5);
+          ctx.stroke();
+
+          ctx.fillStyle = '#6D523E';
+          ctx.beginPath();
+          ctx.ellipse(0, s.size * 1.6, 1.3, 2.3, 0, 0, Math.PI * 2);
+          ctx.fill();
+
+          // 顶部柔和绒毛伞
+          ctx.strokeStyle = '#FFFDF8';
+          ctx.lineWidth = 1.1;
+          for (let i = -3; i <= 3; i++) {
+            const rad = (i * 0.28) - Math.PI / 2;
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(Math.cos(rad) * s.size, Math.sin(rad) * s.size);
+            ctx.stroke();
+          }
+
+          // 柔和暖光点
+          ctx.fillStyle = '#F4D06F';
+          ctx.beginPath();
+          ctx.arc(0, -s.size * 0.4, 1.6, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+
+        function animate() {
+          ctx.clearRect(0, 0, width, height);
+          for (const s of seeds) {
+            s.swayPhase += s.swaySpeed;
+            s.x += s.vx + Math.sin(s.swayPhase) * 0.18;
+            s.y += s.vy + Math.cos(s.swayPhase * 0.8) * 0.22;
+            if (s.x > width + 30 || s.y < -30 || s.y > height + 30) {
+              Object.assign(s, createSeed(false));
+              s.y = Math.random() * height;
+            }
+            drawSeed(s);
+          }
+          requestAnimationFrame(animate);
+        }
+
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        animate();
+      } catch (err) {
+        console.error('蒲公英画布初始化失败:', err);
+      }
+    }
+
+    /* ===========================================================
+       五、岁月年轮交互模块（2012-2025+ 石阶路径）
+       =========================================================== */
+    function getFilteredTimelineIndices() {
+      if (currentTimelinePhase === 'upper') {
+        return TIMELINE_DATA.map((d, idx) => (d.phase === 'upper' ? idx : -1)).filter(i => i !== -1);
+      }
+      if (currentTimelinePhase === 'lower') {
+        return TIMELINE_DATA.map((d, idx) => (d.phase === 'lower' ? idx : -1)).filter(i => i !== -1);
+      }
+      return TIMELINE_DATA.map((_, idx) => idx);
+    }
+
+    function setTimelinePhase(phase) {
+      currentTimelinePhase = phase;
+      const indices = getFilteredTimelineIndices();
+      if (!indices.includes(currentTimelineIndex)) {
+        currentTimelineIndex = indices[0];
+      }
+      renderTimeline();
+    }
+
+    function selectTimelineNode(globalIdx) {
+      currentTimelineIndex = globalIdx;
+      renderTimeline();
+    }
+
+    function stepTimeline(delta) {
+      const indices = getFilteredTimelineIndices();
+      const pos = indices.indexOf(currentTimelineIndex);
+      const nextPos = (pos + delta + indices.length) % indices.length;
+      currentTimelineIndex = indices[nextPos];
+      renderTimeline();
+    }
+
+    function renderTimeline() {
+      try {
+        // 更新 Tab 样式
+        const tabs = {
+          upper: document.getElementById('tab-upper'),
+          lower: document.getElementById('tab-lower'),
+          all: document.getElementById('tab-all')
+        };
+        Object.entries(tabs).forEach(([key, el]) => {
+          if (!el) return;
+          if (key === currentTimelinePhase) {
+            el.className = 'timeline-tab px-5 py-2.5 rounded-full text-sm font-semibold transition-all border bg-moss text-white border-moss shadow-md';
+          } else {
+            el.className = 'timeline-tab px-5 py-2.5 rounded-full text-sm font-medium transition-all border bg-paper-cream text-earth-deep border-earth/20 hover:border-moss hover:bg-moss-light/20';
+          }
+        });
+
+        // 阶段主标题
+        const phaseTitleMap = {
+          upper: '岁月年轮（上）：从朴素起步到专业化探索 (2012 — 2019)',
+          lower: '岁月年轮（下）：深耕全域生态与社区关怀 (2020 — 2025+)',
+          all: '岁月年轮全景：十年坚守，步履不停 (2012 — 2025+)'
+        };
+        document.getElementById('timeline-phase-title').textContent = phaseTitleMap[currentTimelinePhase];
+
+        const indices = getFilteredTimelineIndices();
+        const nodesContainer = document.getElementById('timeline-nodes');
+        const waveOffsets = [18, -14, 16, -18, 10, -14, 18, -10, 14, -16, 8];
+
+        nodesContainer.innerHTML = indices.map((globalIdx, localPos) => {
+          const item = TIMELINE_DATA[globalIdx];
+          const isActive = globalIdx === currentTimelineIndex;
+          const yOffset = waveOffsets[localPos % waveOffsets.length];
+
+          return `
+            <button type="button" onclick="selectTimelineNode(${globalIdx})"
+              style="transform: translateY(${yOffset}px);"
+              class="group relative flex flex-col items-center focus:outline-none transition-all duration-300 ${isActive ? 'scale-110 z-20' : 'hover:scale-105 z-10'}">
+              ${isActive ? `
+                <!-- 迷你衣物银行吉祥物站在当前年份石阶上方 -->
+                <div class="mb-1.5 animate-bounce">
+                  <svg viewBox="0 0 46 52" class="w-10 h-11 drop-shadow-sm" aria-hidden="true">
+                    <rect x="9" y="10" width="28" height="32" rx="6" fill="#FFFDF8" stroke="#4A392C" stroke-width="2"/>
+                    <path d="M5 12 L23 3 L41 12 Z" fill="#5F8D4E" stroke="#4A392C" stroke-width="1.8"/>
+                    <circle cx="18" cy="22" r="2.4" fill="#3B2B22"/>
+                    <circle cx="28" cy="22" r="2.4" fill="#3B2B22"/>
+                    <path d="M19 28 Q23 32 27 28" stroke="#E07A5F" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    <path d="M16 42 L15 48 M30 42 L31 48" stroke="#4D8A6B" stroke-width="3.5" stroke-linecap="round"/>
+                  </svg>
+                </div>
+              ` : '<div class="h-11 mb-1.5 flex items-end"><span class="w-2 h-2 rounded-full bg-moss/40 group-hover:bg-sun"></span></div>'}
+
+              <!-- 发光水彩年份石阶按钮 -->
+              <div class="w-16 h-16 sm:w-[72px] sm:h-[72px] rounded-[24px_18px_22px_20px] flex flex-col items-center justify-center border-2 transition-all ${
+                isActive
+                  ? 'bg-gradient-to-br from-sun-pale via-sun-light/85 to-sun text-earth-deep border-earth-deep shadow-glowGold'
+                  : 'bg-paper-cream/95 text-earth border-earth/25 group-hover:border-moss group-hover:bg-sun-pale/45 shadow-sm'
+              }">
+                <span class="font-storybook text-base sm:text-lg font-bold leading-none">${item.year}</span>
+                <span class="text-[10px] mt-1 opacity-80">${item.tag}</span>
+              </div>
+            </button>
+          `;
+        }).join('');
+
+        // 渲染底部选中年份的绘本木牌详情卡
+        const activeItem = TIMELINE_DATA[currentTimelineIndex];
+        const detailCard = document.getElementById('timeline-detail-card');
+        detailCard.innerHTML = `
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="flex items-start gap-4">
+              <div class="shrink-0 px-4 py-3 rounded-2xl text-center border-2 border-dashed" style="background-color: ${activeItem.color}18; border-color: ${activeItem.color}70;">
+                <div class="font-storybook text-3xl font-bold" style="color: ${activeItem.color};">${activeItem.year}</div>
+                <div class="text-[11px] font-medium text-earth-light mt-0.5">${activeItem.tag}</div>
+              </div>
+              <div>
+                <div class="inline-flex items-center gap-2 mb-1.5">
+                  <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-paper-cream border border-earth/15 text-earth-deep">${activeItem.highlight}</span>
+                </div>
+                <h4 class="font-serif text-xl sm:text-2xl font-bold text-earth-deep mb-2">${activeItem.title}</h4>
+                <p class="text-sm sm:text-base text-earth leading-relaxed">${activeItem.desc}</p>
+              </div>
+            </div>
+            <div class="shrink-0 flex md:flex-col items-center justify-between md:items-end gap-2 pt-3 md:pt-0 border-t md:border-t-0 border-earth/10">
+              <span class="text-xs text-earth-light">里程碑 ${currentTimelineIndex + 1} / ${TIMELINE_DATA.length}</span>
+              <button onclick="openActionModal('donate')" class="px-4 py-2 rounded-full bg-moss/15 hover:bg-moss text-moss-deep hover:text-white text-xs font-semibold transition-colors">
+                延续这份温暖 →
+              </button>
+            </div>
+          </div>
+        `;
+      } catch (err) {
+        console.error('渲染岁月年轮出错:', err);
+      }
+    }
+
+    /* ===========================================================
+       六、邻里小镇七大项目互动模块
+       =========================================================== */
+    function selectTownProject(index) {
+      currentTownIndex = index;
+      renderTownSection();
+    }
+
+    function renderTownSection() {
+      try {
+        const proj = TOWN_PROJECTS[currentTownIndex];
+        const panel = document.getElementById('town-detail-panel');
+
+        // 高亮地图上的地标
+        document.querySelectorAll('.town-pin').forEach((pin, i) => {
+          const bg = pin.querySelector('.pin-label-bg');
+          if (i === currentTownIndex) {
+            pin.style.filter = 'drop-shadow(0 0 10px rgba(229, 169, 60, 0.85))';
+            if (bg) bg.setAttribute('fill', '#FDF3D7');
+          } else {
+            pin.style.filter = 'none';
+            if (bg) bg.setAttribute('fill', '#FFFDF8');
+          }
+        });
+
+        // 更新详情卡片
+        panel.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between gap-3 mb-4">
+              <div class="flex items-center gap-3">
+                <div class="w-13 h-13 w-12 h-12 rounded-2xl bg-paper-kraft/75 border border-earth/15 flex items-center justify-center text-2xl shadow-sm">
+                  ${proj.icon}
+                </div>
+                <div>
+                  <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold mb-1" style="background:${proj.accent}1F; color:${proj.accent};">${proj.badge}</span>
+                  <h3 class="font-storybook text-2xl sm:text-3xl text-earth-deep leading-none">${proj.name}</h3>
+                </div>
+              </div>
+              <span class="text-xs font-serif text-earth-light">0${currentTownIndex + 1} / 07</span>
+            </div>
+
+            <p class="text-sm font-medium text-moss-deep mb-3">${proj.subtitle}</p>
+            <p class="text-sm sm:text-base text-earth leading-relaxed mb-5">${proj.desc}</p>
+
+            <div class="space-y-2 mb-6">
+              <div class="text-xs font-semibold text-earth-light uppercase tracking-wider">服务特色与亮点</div>
+              ${proj.features.map(f => `
+                <div class="flex items-center gap-2.5 px-3.5 py-2 rounded-2xl bg-paper/85 border border-earth/10 text-xs sm:text-sm text-earth-deep">
+                  <span class="w-2 h-2 rounded-full shrink-0" style="background:${proj.accent};"></span>
+                  <span>${f}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-earth/10 flex flex-wrap items-center justify-between gap-3">
+            <button onclick="openVolunteerForProject('${proj.volunteerVal}')" class="px-5 py-2.5 rounded-full bg-moss text-white text-xs sm:text-sm font-medium hover:bg-moss-deep transition-colors shadow-sm">
+              报名参与「${proj.name}」
+            </button>
+            <button onclick="selectTownProject((currentTownIndex + 1) % TOWN_PROJECTS.length)" class="px-4 py-2 rounded-full bg-paper-kraft/75 text-earth-deep text-xs font-medium hover:bg-sun-pale transition-colors">
+              下一个项目 →
+            </button>
+          </div>
+        `;
+
+        // 渲染底部 7 个快捷切换卡片
+        const grid = document.getElementById('town-cards-grid');
+        grid.innerHTML = TOWN_PROJECTS.map((item, idx) => {
+          const active = idx === currentTownIndex;
+          return `
+            <button type="button" onclick="selectTownProject(${idx})"
+              class="p-3.5 rounded-3xl text-center transition-all border bg-gradient-to-b ${item.colorClass} ${
+                active
+                  ? 'ring-2 ring-moss ring-offset-2 ring-offset-paper -translate-y-1 shadow-md'
+                  : 'opacity-85 hover:opacity-100 hover:-translate-y-0.5'
+              }">
+              <div class="text-2xl mb-1.5">${item.icon}</div>
+              <div class="font-serif font-bold text-sm text-earth-deep">${item.name}</div>
+              <div class="text-[11px] text-earth-light mt-0.5 line-clamp-1">${item.badge}</div>
+            </button>
+          `;
+        }).join('');
+      } catch (err) {
+        console.error('渲染邻里小镇模块出错:', err);
+      }
+    }
+
+    function openVolunteerForProject(projectValue) {
+      openActionModal('volunteer');
+      const selectEl = document.getElementById('volunteer-project-select');
+      if (selectEl) selectEl.value = projectValue;
+    }
+
+    /* ===========================================================
+       七、生态矩阵四步交互 + 旧衣温暖转换计算器
+       =========================================================== */
+    function selectMatrixStep(stepIdx, fromUser = true) {
+      currentMatrixStep = stepIdx;
+      if (fromUser && matrixAutoTimer) {
+        clearInterval(matrixAutoTimer);
+        matrixAutoTimer = null;
+      }
+      renderMatrixStep();
+    }
+
+    function renderMatrixStep() {
+      try {
+        const step = MATRIX_STEPS[currentMatrixStep];
+
+        // 高亮 SVG 对应框
+        document.querySelectorAll('.matrix-node').forEach((node, idx) => {
+          const box = node.querySelector('.matrix-box');
+          if (!box) return;
+          if (idx === currentMatrixStep) {
+            box.setAttribute('fill', '#FDF3D7');
+            box.setAttribute('stroke-width', '3.6');
+            node.style.filter = 'drop-shadow(0 8px 14px rgba(109,82,62,0.18))';
+          } else {
+            box.setAttribute('fill', '#FFFDF8');
+            box.setAttribute('stroke-width', '2.2');
+            node.style.filter = 'none';
+          }
+        });
+
+        // 更新右侧按钮状态
+        document.querySelectorAll('.matrix-btn').forEach((btn, idx) => {
+          if (idx === currentMatrixStep) {
+            btn.className = 'matrix-btn px-3.5 py-2.5 rounded-2xl text-left text-xs sm:text-sm font-bold border bg-moss text-white border-moss shadow-sm transition-all';
+          } else {
+            btn.className = 'matrix-btn px-3.5 py-2.5 rounded-2xl text-left text-xs sm:text-sm font-medium border bg-paper-cream text-earth-deep border-earth/15 hover:border-moss hover:bg-moss-light/20 transition-all';
+          }
+        });
+
+        // 更新详情卡片
+        const detail = document.getElementById('matrix-step-detail');
+        detail.innerHTML = `
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold tracking-wider px-2.5 py-0.5 rounded-full" style="background:${step.color}20; color:${step.color};">${step.num} · ${step.tag}</span>
+          </div>
+          <h3 class="font-serif text-xl font-bold text-earth-deep mb-3">${step.title}</h3>
+          <p class="text-sm text-earth leading-relaxed mb-4">${step.desc}</p>
+          <ul class="space-y-2">
+            ${step.points.map(p => `
+              <li class="flex items-center gap-2 text-xs sm:text-sm text-earth-deep">
+                <span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:${step.color};"></span>
+                <span>${p}</span>
+              </li>
+            `).join('')}
+          </ul>
+        `;
+      } catch (err) {
+        console.error('生态矩阵渲染出错:', err);
+      }
+    }
+
+    // 旧衣温暖转换计算器逻辑
+    function updateWarmthCalculator(count) {
+      const n = Math.max(1, Math.min(60, Number(count) || 10));
+      const weightKg = (n * 0.5).toFixed(1);       // 约0.5kg/件
+      const co2Kg = (n * 1.8).toFixed(1);          // 约3.6kg CO2/kg纺织品
+      const meals = Math.max(1, Math.round(n / 5)); // 每5件助力约1份长者饭堂配菜/暖汤能量
+      const waterTons = (n * 1.5).toFixed(0);      // 纺织循环间接节水估算
+      const kids = Math.max(1, Math.floor(n / 8)); // 支持环保研习社亲子手工份数
+
+      document.getElementById('calc-clothes-count').textContent = n;
+      document.getElementById('calc-weight').textContent = weightKg;
+      document.getElementById('calc-co2').textContent = co2Kg;
+      document.getElementById('calc-meals').textContent = meals;
+      document.getElementById('calc-water').textContent = waterTons;
+      document.getElementById('calc-kids').textContent = kids;
+    }
+
+    function setClothesCount(val) {
+      const slider = document.getElementById('clothes-slider');
+      if (slider) slider.value = val;
+      updateWarmthCalculator(val);
+    }
+
+    /* ===========================================================
+       八、爱的蒲公英：全国18省市足迹交互地图
+       =========================================================== */
+    function initFootprintMap() {
+      try {
+        const arcsGroup = document.getElementById('footprint-arcs');
+        const pinsGroup = document.getElementById('footprint-pins');
+        const tagsContainer = document.getElementById('province-tags');
+
+        const originX = 418;
+        const originY = 366;
+
+        // 绘制18条从中山出发的柔和蒲公英曲线
+        arcsGroup.innerHTML = PROVINCES_18.map((p) => {
+          if (p.name === '广东') return '';
+          const midX = (originX + p.x) / 2;
+          const midY = Math.min(originY, p.y) - 42;
+          return `
+            <path class="footprint-arc transition-all duration-300" data-province="${p.name}"
+              d="M ${originX} ${originY} Q ${midX} ${midY} ${p.x} ${p.y}"
+              fill="none" stroke="#E5A93C" stroke-width="1.6" stroke-dasharray="5 6" opacity="0.42" />
+          `;
+        }).join('');
+
+        // 绘制18个发光地区光点与标签
+        pinsGroup.innerHTML = PROVINCES_18.map((p) => `
+          <g class="footprint-pin cursor-pointer" data-province="${p.name}"
+             onmouseenter="highlightProvince('${p.name}')" onclick="highlightProvince('${p.name}')"
+             transform="translate(${p.x}, ${p.y})">
+            <circle class="pin-halo" r="10" fill="#F4D06F" opacity="0.25"/>
+            <circle class="pin-dot" r="5" fill="#5F8D4E" stroke="#FFFDF8" stroke-width="1.8"/>
+            <text y="-10" text-anchor="middle" font-size="10.5" font-weight="600" fill="#4A392C" class="pin-text">${p.name}</text>
+          </g>
+        `).join('');
+
+        // 绘制右侧18个地区互动按钮标签
+        tagsContainer.innerHTML = PROVINCES_18.map((p) => `
+          <button type="button" data-province="${p.name}"
+            onmouseenter="highlightProvince('${p.name}')" onclick="highlightProvince('${p.name}')"
+            class="province-tag px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium border transition-all">
+            ${p.name}
+          </button>
+        `).join('');
+
+        highlightProvince('西藏');
+      } catch (err) {
+        console.error('全国足迹地图初始化出错:', err);
+      }
+    }
+
+    function highlightProvince(name) {
+      currentProvinceName = name;
+      const target = PROVINCES_18.find(p => p.name === name) || PROVINCES_18[0];
+
+      // 更新轨迹高亮
+      document.querySelectorAll('.footprint-arc').forEach(arc => {
+        const isMatch = arc.dataset.province === name;
+        arc.setAttribute('stroke', isMatch ? '#E07A5F' : '#E5A93C');
+        arc.setAttribute('stroke-width', isMatch ? '3.2' : '1.5');
+        arc.setAttribute('opacity', isMatch ? '0.95' : '0.32');
+        if (isMatch) arc.classList.add('water-flow-line');
+        else arc.classList.remove('water-flow-line');
+      });
+
+      // 更新地图光点
+      document.querySelectorAll('.footprint-pin').forEach(pin => {
+        const isMatch = pin.dataset.province === name;
+        const dot = pin.querySelector('.pin-dot');
+        const halo = pin.querySelector('.pin-halo');
+        const text = pin.querySelector('.pin-text');
+        if (dot) {
+          dot.setAttribute('r', isMatch ? '7.5' : '4.8');
+          dot.setAttribute('fill', isMatch ? '#E07A5F' : '#5F8D4E');
+        }
+        if (halo) {
+          halo.setAttribute('r', isMatch ? '16' : '9');
+          halo.setAttribute('fill', isMatch ? '#E07A5F' : '#F4D06F');
+          halo.setAttribute('opacity', isMatch ? '0.32' : '0.2');
+        }
+        if (text) {
+          text.setAttribute('font-size', isMatch ? '12.5' : '10.5');
+          text.setAttribute('fill', isMatch ? '#B54D33' : '#4A392C');
+        }
+      });
+
+      // 更新标签按钮样式
+      document.querySelectorAll('.province-tag').forEach(btn => {
+        const isMatch = btn.dataset.province === name;
+        if (isMatch) {
+          btn.className = 'province-tag px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold border bg-blossom text-white border-blossom shadow-sm scale-105 transition-all';
+        } else {
+          btn.className = 'province-tag px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium border bg-paper-cream text-earth-deep border-earth/15 hover:border-sun hover:bg-sun-pale/50 transition-all';
+        }
+      });
+
+      // 更新明信片内容
+      const postcard = document.getElementById('province-postcard');
+      postcard.innerHTML = `
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <div class="flex items-center gap-2">
+            <span class="text-xl">🌼</span>
+            <h4 class="font-storybook text-2xl text-earth-deep">中山 ➔ ${target.name}</h4>
+          </div>
+          <span class="px-2.5 py-0.5 rounded-full bg-sun-pale text-sun-deep text-[11px] font-semibold">爱的蒲公英明信片</span>
+        </div>
+        <div class="text-xs font-medium text-moss-deep mb-2">${target.region}</div>
+        <p class="text-sm text-earth leading-relaxed">${target.msg}</p>
+      `;
+    }
+
+    /* ===========================================================
+       九、十周年暖心寄语墙（支持添加与点赞，安全持久化）
+       =========================================================== */
+    function loadBlessings() {
+      try {
+        const saved = localStorage.getItem('linshe_10th_blessings');
+        blessingsList = saved ? JSON.parse(saved) : [...DEFAULT_BLESSINGS];
+        if (!Array.isArray(blessingsList) || blessingsList.length === 0) {
+          blessingsList = [...DEFAULT_BLESSINGS];
+        }
+      } catch (err) {
+        blessingsList = [...DEFAULT_BLESSINGS];
+      }
+      renderBlessings();
+    }
+
+    function saveBlessings() {
+      try {
+        localStorage.setItem('linshe_10th_blessings', JSON.stringify(blessingsList));
+      } catch (err) {
+        // iFrame 或隐私模式下忽略存储错误
+      }
+    }
+
+    function renderBlessings() {
+      const wall = document.getElementById('blessing-wall');
+      const countEl = document.getElementById('blessing-count');
+      if (countEl) countEl.textContent = `已收集 ${blessingsList.length} 份暖心祝福`;
+
+      const styleMap = {
+        sun: 'bg-sun-pale/75 border-sun/45',
+        moss: 'bg-moss-light/30 border-moss/35',
+        aqua: 'bg-aqua-pale/75 border-aqua/45',
+        blossom: 'bg-blossom-light/35 border-blossom/35'
+      };
+      const rotMap = ['-rotate-1', 'rotate-1', '-rotate-[0.6deg]', 'rotate-[0.8deg]'];
+
+      wall.innerHTML = blessingsList.map((b, idx) => `
+        <div class="p-5 rounded-[22px_16px_24px_18px] border-2 border-dashed shadow-sm transition-transform hover:rotate-0 hover:-translate-y-1 ${styleMap[b.color] || styleMap.sun} ${rotMap[idx % rotMap.length]}">
+          <p class="text-sm text-earth-deep leading-relaxed mb-4">“${escapeHtml(b.text)}”</p>
+          <div class="flex items-center justify-between text-xs text-earth-light pt-2 border-t border-earth/10">
+            <span class="font-serif font-bold text-earth-deep">— ${escapeHtml(b.name)}</span>
+            <div class="flex items-center gap-2.5">
+              <span>${escapeHtml(b.date)}</span>
+              <button type="button" onclick="likeBlessing(${idx})" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-paper-cream/85 hover:bg-blossom hover:text-white text-blossom transition-colors">
+                <span>♥</span><span>${b.likes || 1}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function likeBlessing(idx) {
+      if (!blessingsList[idx]) return;
+      blessingsList[idx].likes = (blessingsList[idx].likes || 0) + 1;
+      saveBlessings();
+      renderBlessings();
+    }
+
+    /* ===========================================================
+       十、加入我们弹窗 & 电子公益感谢卡逻辑
+       =========================================================== */
+    function openActionModal(tab = 'donate') {
+      const modal = document.getElementById('action-modal');
+      document.getElementById('modal-form-view').classList.remove('hidden');
+      document.getElementById('modal-certificate-view').classList.add('hidden');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+      switchModalTab(tab);
+    }
+
+    function closeActionModal() {
+      const modal = document.getElementById('action-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    function switchModalTab(tab) {
+      const donateTab = document.getElementById('modal-tab-donate');
+      const volTab = document.getElementById('modal-tab-volunteer');
+      const donateForm = document.getElementById('donate-form');
+      const volForm = document.getElementById('volunteer-form');
+
+      if (tab === 'donate') {
+        donateTab.className = 'py-2 rounded-full text-sm font-bold bg-paper-cream text-moss-deep shadow-sm transition-all';
+        volTab.className = 'py-2 rounded-full text-sm font-medium text-earth-light hover:text-earth-deep transition-all';
+        donateForm.classList.remove('hidden');
+        volForm.classList.add('hidden');
+      } else {
+        volTab.className = 'py-2 rounded-full text-sm font-bold bg-paper-cream text-sun-deep shadow-sm transition-all';
+        donateTab.className = 'py-2 rounded-full text-sm font-medium text-earth-light hover:text-earth-deep transition-all';
+        volForm.classList.remove('hidden');
+        donateForm.classList.add('hidden');
+      }
+    }
+
+    function showCertificate(userName, type, extraDetail) {
+      const now = new Date();
+      const dateStr = `${now.getFullYear()}年${now.getMonth() + 1}月${now.getDate()}日`;
+      const certId = `LS10-${now.getFullYear()}-${String(Math.floor(1000 + Math.random() * 9000))}`;
+
+      document.getElementById('cert-user-name').textContent = userName;
+      document.getElementById('cert-id').textContent = certId;
+      document.getElementById('cert-date').textContent = dateStr;
+
+      const msg = type === 'donate'
+        ? `感谢您预约捐赠闲置衣物（${extraDetail}）！邻舍“衣物银行”将妥善分拣循环，让您的善意化作长者饭堂的热气与环保教育的力量。`
+        : `欢迎加入邻舍志愿大家庭（意向项目：${extraDetail}）！期待与您在中山的社区角落并肩同行，共绘下一个十年的温情画卷。`;
+
+      document.getElementById('cert-message').textContent = msg;
+      latestCertificateCopyText = `【邻舍10周年电子公益感谢卡】编号：${certId}｜${userName}已加入中山市邻舍社会工作服务中心10周年公益同行！专注环保·乐在分享，We care, We share!`;
+
+      document.getElementById('modal-form-view').classList.add('hidden');
+      document.getElementById('modal-certificate-view').classList.remove('hidden');
+      showToast('提交成功！已为您生成专属电子公益感谢卡');
+    }
+
+    // 兼容 iFrame 的安全复制方法（使用 document.execCommand('copy')）
+    function copyCertificateText() {
+      try {
+        const tempInput = document.createElement('textarea');
+        tempInput.value = latestCertificateCopyText;
+        tempInput.style.position = 'fixed';
+        tempInput.style.opacity = '0';
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+        showToast('公益纪念文案已复制到剪贴板，快去分享吧！');
+      } catch (err) {
+        showToast('已为您准备好纪念文案，请截图保存感谢卡', 'info');
+      }
+    }
+
+    /* ===========================================================
+       十一、滚动显现动效 & 数字递增动画
+       =========================================================== */
+    function initScrollAnimations() {
+      // 区块渐现
+      const revealEls = document.querySelectorAll('.reveal');
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealEls.forEach(el => revealObserver.observe(el));
+
+      // 数字递增动画
+      const counters = document.querySelectorAll('.counter');
+      const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          const target = parseInt(el.dataset.target, 10) || 0;
+          const duration = 1500;
+          const startTime = performance.now();
+
+          function tick(now) {
+            const progress = Math.min((now - startTime) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.round(eased * target).toLocaleString('zh-CN');
+            if (progress < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+          counterObserver.unobserve(el);
+        });
+      }, { threshold: 0.35 });
+      counters.forEach(c => counterObserver.observe(c));
+    }
+
+    /* ===========================================================
+       十二、页面初始化入口
+       =========================================================== */
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. 移动端菜单切换
+      const menuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+          link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+      }
+
+      // 2. 点击弹窗遮罩关闭
+      const modal = document.getElementById('action-modal');
+      if (modal) {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) closeActionModal();
+        });
+      }
+
+      // 3. 绑定捐赠 & 志愿者表单提交
+      document.getElementById('donate-form')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const fd = new FormData(e.target);
+        const name = (fd.get('name') || '').toString().trim() || '热心市民';
+        const district = fd.get('district') || '中山市';
+        const amount = fd.get('amount') || '闲置衣物';
+        showCertificate(name, 'donate', `${district} · ${amount}`);
+        e.target.reset();
+      });
+
+      document.getElementById('volunteer-form')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const fd = new FormData(e.target);
+        const name = (fd.get('name') || '').toString().trim() || '公益伙伴';
+        const project = fd.get('project') || '邻舍志愿服务';
+        showCertificate(name, 'volunteer', project);
+        e.target.reset();
+      });
+
+      // 4. 绑定十周年寄语墙表单
+      document.getElementById('blessing-form')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const nameInput = document.getElementById('blessing-name');
+        const textInput = document.getElementById('blessing-text');
+        const colorInput = document.querySelector('input[name="noteColor"]:checked');
+        const name = nameInput.value.trim();
+        const text = textInput.value.trim();
+        if (!name || !text) {
+          showToast('请填写您的称呼和祝福内容哦', 'info');
+          return;
+        }
+        const now = new Date();
+        blessingsList.unshift({
+          name,
+          text,
+          color: colorInput ? colorInput.value : 'sun',
+          date: `${now.getFullYear()}.${now.getMonth() + 1}.${now.getDate()}`,
+          likes: 1
+        });
+        saveBlessings();
+        renderBlessings();
+        e.target.reset();
+        showToast('您的十周年温暖祝福已贴上寄语墙！');
+      });
+
+      // 5. 绑定旧衣温暖计算器滑块
+      const slider = document.getElementById('clothes-slider');
+      if (slider) {
+        slider.addEventListener('input', (e) => updateWarmthCalculator(e.target.value));
+        updateWarmthCalculator(slider.value);
+      }
+
+      // 6. 初始化各核心互动模块
+      initDandelionCanvas();
+      renderTimeline();
+      renderTownSection();
+      renderMatrixStep();
+      initFootprintMap();
+      loadBlessings();
+      initScrollAnimations();
+
+      // 7. 生态矩阵自动柔和轮播（用户点击后自动停止，专注阅读）
+      matrixAutoTimer = setInterval(() => {
+        selectMatrixStep((currentMatrixStep + 1) % MATRIX_STEPS.length, false);
+      }, 4800);
+    });
+  </script>
+</body>
+</html>
